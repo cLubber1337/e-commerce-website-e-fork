@@ -1,0 +1,22 @@
+//Fonts
+$font-main: "Poppins", sans-serif;
+$background-color: whitesmoke;
+//Colors
+$header-color: #122538;
+$green: #00a046;
+$green80: #44b26f;
+$black: #221f1f;
+$black60: #797878;
+$red: #f84147;
+$blue: #3e77aa;
+$blue-light: #adb8c8;
+$white: #fff;
+//Media
+$tablet: 959px;
+
+//Mixins
+@mixin mediaTablet {
+  @media screen and (max-width: $tablet) {
+    @content;
+  }
+}

@@ -1,0 +1,30 @@
+@import "./vars";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap");
+body {
+  font-family: $font-main;
+  background-color: $background-color;
+  color: $white;
+  font-size: 14px;
+}
+
+a {
+  color: $white;
+  transition: color 0.2s ease-in;
+  &:hover {
+    color: $blue-light;
+  }
+}
+
+.container {
+  box-sizing: border-box;
+  display: block;
+  margin: 0 auto;
+  max-width: 1600px;
+  padding-left: 8px;
+  padding-right: 8px;
+  width: 100%;
+}
+
+.none {
+  display: none !important;
+}
