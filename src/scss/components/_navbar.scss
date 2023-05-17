@@ -1,0 +1,45 @@
+@import "./src/scss/base/vars";
+
+.navbar {
+  width: 200px;
+  border-right: 1px solid $green80;
+  height: 100%;
+}
+.navbar__items {
+  position: relative;
+  border-radius: 4px;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  background-color: whitesmoke;
+}
+
+.navbar__items__item {
+}
+.navbar__items__item-icon {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-top: -4px;
+  margin-right: 8px;
+  text-align: center;
+  width: 24px;
+  height: 24px;
+}
+.navbar__items__item-link {
+  color: $blue;
+  position: relative;
+  z-index: 10;
+  display: inline-block;
+  vertical-align: bottom;
+  width: 100%;
+  padding-left: 12px;
+  padding-right: 12px;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 31px;
+  transition: all 0.2s ease;
+  &:hover {
+    color: $red;
+    text-decoration: underline;
+  }
+}

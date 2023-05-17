@@ -18,7 +18,7 @@ export const Header = () => {
             <div className={"header__logo-icon"}></div>
           </Link>
 
-          {/*Input*/}
+          {/*Search form*/}
           <div className={"search-form"}>
             <input
               value={inputValue}

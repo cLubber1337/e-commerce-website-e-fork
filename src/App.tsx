@@ -13,15 +13,17 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchCategories())
-  }, [])
+  }, [dispatch])
 
   return (
     <>
       <Header />
-      <Navbar />
-      <Routes>
-        <Route path={PATHS.HOME} element={<Home />} />
-      </Routes>
+      <div className="container">
+        <Navbar />
+        <Routes>
+          <Route path={PATHS.HOME} element={<Home />} />
+        </Routes>
+      </div>
     </>
   )
 }

@@ -29,6 +29,6 @@ const categoriesSlice = createSlice({
   },
 })
 
-export const selectCategories = (state: RootState) => state.categories
+export const selectCategories = (state: RootState) => state.categories.categories
 
 export default categoriesSlice.reducer
