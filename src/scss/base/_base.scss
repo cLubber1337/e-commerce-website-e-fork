@@ -8,10 +8,11 @@ body {
 }
 
 a {
-  color: $white;
+  color: $black;
   transition: color 0.2s ease-in;
   &:hover {
-    color: $blue-light;
+    color: $red;
+    text-decoration: underline;
   }
 }
 
@@ -27,4 +28,10 @@ a {
 
 .none {
   display: none !important;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 175px);
+  grid-gap: 10px;
+  justify-content: space-around;
 }

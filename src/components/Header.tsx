@@ -40,7 +40,7 @@ export const Header = () => {
               onClick={() => null}
               size={"-medium"}
               color={"-green"}
-              border={"-search"}
+              purpose={"-search"}
             />
           </div>
 

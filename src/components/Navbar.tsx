@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { selectCategories } from "features/categories/categoriesSlice"
-import { useAppSelector } from "features/store"
+import { getProductsCategory, selectNamesCategories } from "features/categories/categoriesSlice"
+import { useAppDispatch, useAppSelector } from "features/store"
 import {
   faBagShopping,
   faBottleDroplet,
@@ -24,7 +24,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export const Navbar = () => {
-  const categories = useAppSelector(selectCategories)
+  const dispatch = useAppDispatch()
+  const categories = useAppSelector(selectNamesCategories)
   const icons = [
     faMobileScreenButton,
     faLaptop,
@@ -48,12 +49,19 @@ export const Navbar = () => {
     faLightbulb,
   ]
 
+  const handleSelectCategory = (category: string) => {
+    dispatch(getProductsCategory(category))
+  }
   return (
     <aside className={"navbar"}>
       <ul className={"navbar__items"}>
         {categories &&
           categories.map((category, index) => (
-            <li className={"navbar__items__item"} key={category}>
+            <li
+              className={"navbar__items__item"}
+              key={category}
+              onClick={() => handleSelectCategory(category)}
+            >
               <Link className={"navbar__items__item-link"} to={`/products/category/${category}`}>
                 <span className={"navbar__items__item-icon"}>
                   <FontAwesomeIcon icon={icons[index]} />
