@@ -31,6 +31,12 @@
     height: 48px;
     line-height: 48px;
     font-size: 20px;
+    @include mediaTablet {
+      line-height: 40px;
+      height: 40px;
+      font-size: 18px;
+      font-weight: bold;
+    }
   }
 
   //colors

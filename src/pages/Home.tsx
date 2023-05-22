@@ -1,6 +1,6 @@
 import React from "react"
 import { useAppSelector } from "features/store"
-import { selectAllProducts } from "features/products/productsSlice"
+import { selectAllProducts } from "features/products"
 
 export const Home = () => {
   const allProducts = useAppSelector(selectAllProducts)

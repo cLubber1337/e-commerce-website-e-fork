@@ -1,0 +1,143 @@
+@import "./src/scss/base/vars";
+
+.product-card {
+  display: flex;
+  justify-content: center;
+  padding: 100px 0;
+  @include mediaTablet {
+    padding: 50px 0;
+  }
+}
+.product-card__grid {
+  background-color: $white;
+  border-radius: 5px;
+  padding: 20px;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 1fr 1fr;
+  @include mediaTablet {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.product-card__images {
+  img {
+    width: 100%;
+    border-radius: 5px;
+    max-height: 500px;
+    @include mediaTablet {
+      max-height: 400px;
+    }
+  }
+}
+.product-info {
+  color: $black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  @include mediaTablet {
+    margin-top: 20px;
+  }
+}
+.product-info__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.product-info__description {
+  margin-top: 30px;
+  font-size: 1rem;
+}
+
+.product-info__rbc {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+
+  &__item {
+    border-right: $header-color solid 4px;
+    font-size: 1rem;
+    padding: 0 10px;
+    @include mediaTablet {
+      font-size: 14px;
+    }
+    span {
+      color: $header-color;
+      font-weight: bold;
+    }
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      border-right: none;
+    }
+  }
+}
+
+.product-info__price {
+  display: flex;
+  margin: 30px 10px;
+  flex-direction: column;
+  justify-content: flex-end;
+  @include mediaTablet {
+    margin: 20px 10px;
+  }
+
+  &__old {
+    font-size: 1.2rem;
+    color: $black60;
+    text-decoration: line-through;
+    line-height: 1.2rem;
+    padding-left: 7px;
+  }
+  p {
+    position: relative;
+  }
+
+  &__new {
+    color: $red;
+    font-weight: bold;
+    font-size: 2.5rem;
+    padding-right: 8px;
+  }
+  &__discount {
+    position: absolute;
+    padding: 2px 5px;
+    color: $white;
+    background-color: $red;
+    border-radius: 5px;
+  }
+}
+
+.product-info__quantity {
+  display: flex;
+  font-size: 1.2rem;
+  align-items: center;
+  gap: 8px;
+
+  &__label {
+    padding-right: 5px;
+  }
+
+  &__btn {
+    padding: 2px 10px;
+    border: 2px solid $black60;
+    border-radius: 5px;
+    &:hover {
+      background-color: $blue-light;
+      color: white;
+    }
+    &:active {
+      background-color: $black60;
+    }
+  }
+  &__qty {
+    padding: 2px 10px;
+  }
+}
+
+.product-info__actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
