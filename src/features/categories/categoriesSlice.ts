@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { BASE_URL } from "utils/constants"
 import axios from "axios"
-import { RootState } from "features/store"
 import { Products } from "types/categories"
 
 export const fetchNamesCategories = createAsyncThunk(
@@ -48,8 +47,5 @@ const categoriesSlice = createSlice({
     })
   },
 })
-
-export const selectNamesCategories = (state: RootState) => state.categories.namesCategories
-export const selectCategory = (state: RootState) => state.categories.category
 
 export default categoriesSlice.reducer

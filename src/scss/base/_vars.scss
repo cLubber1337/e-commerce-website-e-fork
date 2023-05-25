@@ -12,12 +12,19 @@ $red: #f84147;
 $blue: #3e77aa;
 $blue-light: #adb8c8;
 $white: #fff;
+
 //Media
 $tablet: 959px;
+$mobile: 600px;
 
 //Mixins
 @mixin mediaTablet {
   @media screen and (max-width: $tablet) {
+    @content;
+  }
+}
+@mixin mediaMobile {
+  @media screen and (max-width: $mobile) {
     @content;
   }
 }

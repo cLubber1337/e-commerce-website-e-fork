@@ -7,6 +7,7 @@ import { PATHS } from "utils/paths"
 import { fetchNamesCategories } from "features/categories/categoriesSlice"
 import { useAppDispatch } from "features/store"
 import { getAllProducts } from "features/products/productsSlice"
+import { Cart } from "pages/Cart"
 import ProductInfoCard from "pages/ProductInfoCard"
 
 function App() {
@@ -21,14 +22,12 @@ function App() {
     <>
       <Header />
       <div className="container">
-        {/*<div className="grid-container">*/}
-        {/*  <Navbar />*/}
         <Routes>
           <Route path={PATHS.HOME} element={<Home />} />
           <Route path={PATHS.PRODUCT} element={<ProductInfoCard />} />
+          <Route path={PATHS.CART} element={<Cart />} />
         </Routes>
       </div>
-      {/*</div>*/}
     </>
   )
 }

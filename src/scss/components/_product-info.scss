@@ -114,6 +114,10 @@
   font-size: 1.2rem;
   align-items: center;
   gap: 8px;
+  @include mediaMobile {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
 
   &__label {
     padding-right: 5px;
@@ -123,6 +127,9 @@
     padding: 2px 10px;
     border: 2px solid $black60;
     border-radius: 5px;
+    @include mediaMobile {
+      padding: 0 8px;
+    }
     &:hover {
       background-color: $blue-light;
       color: white;

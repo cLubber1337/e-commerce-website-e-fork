@@ -7,6 +7,8 @@ const ProductInfoCard = () => {
   const dispatch = useAppDispatch()
   const { title, description, thumbnail, rating, category, price, discountPercentage, brand } =
     useAppSelector(selectSingleProduct)
+  const percent = Math.ceil(discountPercentage)
+  const currentPrice = Math.ceil((price * (100 - percent)) / 100)
 
   useEffect(() => {
     dispatch(getSingleProduct(7))
@@ -36,10 +38,10 @@ const ProductInfoCard = () => {
             </span>
           </div>
           <div className="product-info__price">
-            <span className={"product-info__price__old"}>${price + 20}</span>
+            <span className={"product-info__price__old"}>${price}</span>
             <p>
-              <span className="product-info__price__new">${price} </span>
-              <span className="product-info__price__discount">-{discountPercentage}%</span>
+              <span className="product-info__price__new">${currentPrice} </span>
+              <span className="product-info__price__discount">-{percent}%</span>
             </p>
           </div>
           <div className="product-info__quantity">
@@ -54,6 +56,7 @@ const ProductInfoCard = () => {
               onClick={() => null}
               size="-large"
               color="-grey"
+              icon={["fas", "cart-plus"]}
             ></CustomButton>
             <CustomButton
               title="Buy now"

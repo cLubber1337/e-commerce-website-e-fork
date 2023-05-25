@@ -3,7 +3,7 @@
 body {
   font-family: $font-main;
   background-color: $background-color;
-  color: $white;
+  color: $black;
   font-size: 14px;
 }
 
@@ -15,7 +15,15 @@ a {
     text-decoration: underline;
   }
 }
-
+svg {
+  cursor: pointer;
+}
+button {
+  cursor: pointer;
+  transition-duration: 0.2s;
+  transition-property: color, background-color, border-color;
+  transition-timing-function: ease-in-out;
+}
 .container {
   box-sizing: border-box;
   display: block;

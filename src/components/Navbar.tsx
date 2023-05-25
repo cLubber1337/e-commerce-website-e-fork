@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { getProductsCategory, selectNamesCategories } from "features/categories/categoriesSlice"
+import { getProductsCategory } from "features/categories/categoriesSlice"
 import { useAppDispatch, useAppSelector } from "features/store"
 import {
   faBagShopping,
@@ -22,6 +22,7 @@ import {
   faShoePrints,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { selectNamesCategories } from "features/categories"
 
 export const Navbar = () => {
   const dispatch = useAppDispatch()
