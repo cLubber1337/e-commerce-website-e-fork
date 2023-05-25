@@ -8,7 +8,7 @@ export const Cart = () => {
   const dispatch = useAppDispatch()
   const { title, price, thumbnail } = useAppSelector(selectSingleProduct)
   useEffect(() => {
-    dispatch(getSingleProduct(1))
+    dispatch(getSingleProduct(18))
   }, [dispatch])
 
   return (

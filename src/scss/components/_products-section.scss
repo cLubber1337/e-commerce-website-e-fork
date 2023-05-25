@@ -1,0 +1,24 @@
+@import "./src/scss/base/vars";
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+}
+
+.products-section {
+  padding-left: 20px;
+  &__title {
+    color: $black60;
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 12px 20px;
+    border-left: $header-color solid 12px;
+    background-color: $white;
+    line-height: 2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    @include mediaMobile {
+      font-size: 1.5rem;
+      padding: 5px 10px;
+    }
+  }
+}

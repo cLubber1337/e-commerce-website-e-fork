@@ -15,12 +15,13 @@ const ProductInfoCard = () => {
   }, [dispatch])
 
   return (
-    <section className="product-card">
-      <div className="product-card__grid">
-        <div className="product-card__images">
+    <section className="product-info-section">
+      <div className="product-info-section__grid">
+        {/*---------------IMAGES-------------------*/}
+        <div className="product-info__images">
           <img src={thumbnail} alt={thumbnail} />
         </div>
-
+        {/*---------------DESCRIPTION-------------------*/}
         <div className="product-info">
           <h1 className="product-info__title">{title}</h1>
           <p className="product-info__description">{description}</p>
@@ -37,6 +38,7 @@ const ProductInfoCard = () => {
               <span>Category</span>: {category}
             </span>
           </div>
+          {/*----------------PRICE-------------------*/}
           <div className="product-info__price">
             <span className={"product-info__price__old"}>${price}</span>
             <p>
@@ -44,12 +46,14 @@ const ProductInfoCard = () => {
               <span className="product-info__price__discount">-{percent}%</span>
             </p>
           </div>
+          {/*----------------QUANTITY-------------------*/}
           <div className="product-info__quantity">
             <span className="product-info__quantity__label">Quantity:</span>
             <button className="product-info__quantity__btn">-</button>
             <span className="product-info__quantity__qty">1</span>
             <button className="product-info__quantity__btn">+</button>
           </div>
+          {/*----------------ACTIONS-------------------*/}
           <div className="product-info__actions">
             <CustomButton
               title="Add to cart"

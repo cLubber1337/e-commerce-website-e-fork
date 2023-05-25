@@ -37,9 +37,10 @@ button {
 .none {
   display: none !important;
 }
-.grid-container {
+.grid-home-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 175px);
-  grid-gap: 10px;
-  justify-content: space-around;
+  grid-template-columns: 300px 1fr;
+  @include mediaTablet {
+    grid-template-columns: 200px 1fr;
+  }
 }

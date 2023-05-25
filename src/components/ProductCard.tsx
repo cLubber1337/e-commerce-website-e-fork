@@ -20,35 +20,38 @@ export const ProductCard = ({
 }: Props) => {
   const percent = Math.ceil(discountPercentage)
   const currentPrice = Math.ceil((price * (100 - percent)) / 100)
+  const categoryTitle = category[0].toUpperCase() + category.slice(1)
 
   return (
-    <div className={"product"}>
-      <Link to={""}>
-        <img className={"product__image"} src={thumbnail} alt="title" />
-      </Link>
-      <div className="product__info">
-        <div className="product__info__category">
-          <span className="product__info__category__text">{category}</span>
+    <div className="product-card">
+      <div className="product-card__image">
+        <Link to={""}>
+          <img src={thumbnail} alt="title" />
+        </Link>
+      </div>
+      <div className="product-card__info">
+        <div className="product-card__info__category">
+          <span className="product-card__info__category__text">{categoryTitle}</span>
         </div>
-        <div className="product__info__name">
+        <div className="product-card__info__name">
           <p>{brand}</p>
           <Link to="">{title}</Link>
         </div>
-        <div className="product__price">
-          <p className="product__price__percent">-{percent}%</p>
-          <span className="product__price__curr">${currentPrice}</span>
-          <span className="product__price__old">${price}</span>
+        <div className="product-card__price">
+          <p className="product-card__price__percent">-{percent}%</p>
+          <span className="product-card__price__curr">${currentPrice}</span>
+          <span className="product-card__price__old">${price}</span>
         </div>
-
-        <div className="product_actions">
-          <CustomButton
-            title={"Add to card"}
-            onClick={() => null}
-            size={"-medium"}
-            color={"-green"}
-            purpose={"-cart"}
-          />
-        </div>
+      </div>
+      <div className="product-card__actions">
+        <CustomButton
+          title="Add to card"
+          onClick={() => null}
+          size="-small"
+          color="-green"
+          icon={["fas", "cart-plus"]}
+          purpose="-cart"
+        />
       </div>
     </div>
   )

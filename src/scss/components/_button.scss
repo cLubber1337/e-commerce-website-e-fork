@@ -12,6 +12,7 @@
   position: relative;
   text-align: center;
   align-items: center;
+  justify-content: center;
   display: flex;
   gap: 8px;
   transition-duration: 0.35s;
@@ -71,7 +72,6 @@
   }
   &-cart {
     font-weight: 700;
-    width: 175px;
-    border-radius: 0 0 10px 10px;
+    width: 90%;
   }
 }
