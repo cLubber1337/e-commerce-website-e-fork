@@ -2,17 +2,22 @@ import React, { useEffect } from "react"
 import { useAppDispatch, useAppSelector } from "features/store"
 import { getSingleProduct, selectSingleProduct } from "features/products"
 import { CustomButton } from "components/CustomButton"
+import { useParams } from "react-router-dom"
+import { getCategoryNameHelper, getOldPriceHelper, getPercentHelper } from "utils/productHelpers"
 
 const ProductInfoCard = () => {
   const dispatch = useAppDispatch()
+  const { id } = useParams()
+  useEffect(() => {
+    dispatch(getSingleProduct(Number(id)))
+  }, [dispatch, id])
+
   const { title, description, thumbnail, rating, category, price, discountPercentage, brand } =
     useAppSelector(selectSingleProduct)
-  const percent = Math.ceil(discountPercentage)
-  const currentPrice = Math.ceil((price * (100 - percent)) / 100)
 
-  useEffect(() => {
-    dispatch(getSingleProduct(7))
-  }, [dispatch])
+  const discount = getPercentHelper(discountPercentage)
+  const oldPrice = getOldPriceHelper(price, discount)
+  const categoryName = getCategoryNameHelper(category)
 
   return (
     <section className="product-info-section">
@@ -35,15 +40,15 @@ const ProductInfoCard = () => {
             </span>
 
             <span className="product-info__rbc__item">
-              <span>Category</span>: {category}
+              <span>Category</span>: {categoryName}
             </span>
           </div>
           {/*----------------PRICE-------------------*/}
           <div className="product-info__price">
-            <span className={"product-info__price__old"}>${price}</span>
+            <span className={"product-info__price__old"}>${oldPrice}</span>
             <p>
-              <span className="product-info__price__new">${currentPrice} </span>
-              <span className="product-info__price__discount">-{percent}%</span>
+              <span className="product-info__price__new">${price}</span>
+              <span className="product-info__price__discount">-{discount}%</span>
             </p>
           </div>
           {/*----------------QUANTITY-------------------*/}

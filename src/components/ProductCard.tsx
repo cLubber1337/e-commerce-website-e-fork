@@ -1,6 +1,8 @@
 import React from "react"
 import { CustomButton } from "components/CustomButton"
 import { Link } from "react-router-dom"
+import { PATHS } from "utils/paths"
+import { getCategoryNameHelper, getOldPriceHelper, getPercentHelper } from "utils/productHelpers"
 
 type Props = {
   title: string
@@ -9,6 +11,7 @@ type Props = {
   brand: string
   category: string
   discountPercentage: number
+  id: number
 }
 export const ProductCard = ({
   title,
@@ -17,30 +20,31 @@ export const ProductCard = ({
   discountPercentage,
   thumbnail,
   price,
+  id,
 }: Props) => {
-  const percent = Math.ceil(discountPercentage)
-  const currentPrice = Math.ceil((price * (100 - percent)) / 100)
-  const categoryTitle = category[0].toUpperCase() + category.slice(1)
+  const discount = getPercentHelper(discountPercentage)
+  const oldPrice = getOldPriceHelper(price, discount)
+  const categoryName = getCategoryNameHelper(category)
 
   return (
     <div className="product-card">
       <div className="product-card__image">
-        <Link to={""}>
+        <Link to={`${PATHS.PRODUCT}/${id}`}>
           <img src={thumbnail} alt="title" />
         </Link>
       </div>
       <div className="product-card__info">
         <div className="product-card__info__category">
-          <span className="product-card__info__category__text">{categoryTitle}</span>
+          <span className="product-card__info__category__text">{categoryName}</span>
         </div>
         <div className="product-card__info__name">
           <p>{brand}</p>
-          <Link to="">{title}</Link>
+          <Link to={`${PATHS.PRODUCT}/${id}`}>{title}</Link>
         </div>
         <div className="product-card__price">
-          <p className="product-card__price__percent">-{percent}%</p>
-          <span className="product-card__price__curr">${currentPrice}</span>
-          <span className="product-card__price__old">${price}</span>
+          <p className="product-card__price__discount">-{discount}%</p>
+          <span className="product-card__price__curr">${price}</span>
+          <span className="product-card__price__old">${oldPrice}</span>
         </div>
       </div>
       <div className="product-card__actions">

@@ -24,7 +24,7 @@ function App() {
       <div className="container">
         <Routes>
           <Route path={PATHS.HOME} element={<Home />} />
-          <Route path={PATHS.PRODUCT} element={<ProductInfoCard />} />
+          <Route path={`${PATHS.PRODUCT}/:id`} element={<ProductInfoCard />} />
           <Route path={PATHS.CART} element={<Cart />} />
         </Routes>
       </div>
