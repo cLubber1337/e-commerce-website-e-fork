@@ -3,6 +3,8 @@ import { CustomButton } from "components/CustomButton"
 import { Link } from "react-router-dom"
 import { PATHS } from "utils/paths"
 import { getCategoryNameHelper, getOldPriceHelper, getPercentHelper } from "utils/productHelpers"
+import { useAppDispatch } from "features/store"
+import { addItem } from "features/cart"
 
 type Props = {
   title: string
@@ -25,6 +27,18 @@ export const ProductCard = ({
   const discount = getPercentHelper(discountPercentage)
   const oldPrice = getOldPriceHelper(price, discount)
   const categoryName = getCategoryNameHelper(category)
+  const dispatch = useAppDispatch()
+
+  const addToCart = () => {
+    const item = {
+      id,
+      title,
+      price,
+      thumbnail: thumbnail || "",
+      count: 1,
+    }
+    dispatch(addItem({ item }))
+  }
 
   return (
     <div className="product-card">
@@ -50,7 +64,7 @@ export const ProductCard = ({
       <div className="product-card__actions">
         <CustomButton
           title="Add to card"
-          onClick={() => null}
+          onClick={addToCart}
           size="-small"
           color="-green"
           icon={["fas", "cart-plus"]}

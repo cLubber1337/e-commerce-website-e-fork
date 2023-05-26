@@ -1,16 +1,28 @@
-import React, { useEffect } from "react"
-import { getSingleProduct, selectSingleProduct } from "features/products"
+import React from "react"
 import { useAppDispatch, useAppSelector } from "features/store"
 import { CustomButton } from "components/CustomButton"
-import { CartProduct } from "components/Cart/CartProduct"
+import { CartItem } from "components/Cart/CartItem"
+import {
+  clearItems,
+  selectCartItems,
+  selectTotalCountItemsCart,
+  selectTotalPriceCart,
+} from "features/cart"
+import { CartItemType } from "types/cart-types"
 
 export const Cart = () => {
+  const cartItems: CartItemType[] = useAppSelector(selectCartItems)
+  const totalItemsInCart: number = useAppSelector(selectTotalCountItemsCart)
+  const totalPrice = useAppSelector(selectTotalPriceCart)
   const dispatch = useAppDispatch()
-  const { title, price, thumbnail } = useAppSelector(selectSingleProduct)
-  useEffect(() => {
-    dispatch(getSingleProduct(18))
-  }, [dispatch])
 
+  if (!totalItemsInCart) {
+    return (
+      <div className="section-cart">
+        <h1 style={{ color: "red", fontSize: "30px" }}>КОРЗИНА ПУСТАЯ</h1>
+      </div>
+    )
+  }
   return (
     <section className="section-cart">
       <h1 className="section-cart__title">Shopping Cart</h1>
@@ -23,15 +35,13 @@ export const Cart = () => {
       </header>
 
       <div className="cart">
-        {[1, 2, 3].map((product) => (
-          <CartProduct key={product} title={title} price={price} thumbnail={thumbnail} />
-        ))}
+        {cartItems && cartItems.map((cartItem) => <CartItem key={cartItem.id} {...cartItem} />)}
       </div>
 
       <footer className="cart-footer">
-        <div className="cart-footer__count">3 items</div>
+        <div className="cart-footer__count">{totalItemsInCart} items</div>
         <div className="cart-footer__total">
-          Total: <span>$500</span>
+          Total: <span>${totalPrice}</span>
         </div>
       </footer>
 
@@ -39,14 +49,14 @@ export const Cart = () => {
         <div className="section-cart__actions__clear">
           <CustomButton
             title="CLEAR CART"
-            onClick={() => {}}
+            onClick={() => dispatch(clearItems())}
             size="-large"
             color="-grey"
             icon={["fas", "trash"]}
           />
         </div>
         <div className="section-cart__actions__checkout">
-          <CustomButton title="CHECKOUT" onClick={() => {}} size="-large" color="-green" />
+          <CustomButton title="CHECKOUT" onClick={() => null} size="-large" color="-green" />
         </div>
       </div>
     </section>

@@ -1,4 +1,5 @@
 export const getCategoryNameHelper = (categoryName: string) => {
+  if (!categoryName) return ""
   let newCategoryName = categoryName[0].toUpperCase() + categoryName.slice(1)
   newCategoryName = newCategoryName.replace(/-/g, " ")
   return newCategoryName

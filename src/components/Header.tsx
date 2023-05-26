@@ -5,8 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser } from "@fortawesome/free-regular-svg-icons/faUser"
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping"
 import { Search } from "components/Search"
+import { useAppSelector } from "features/store"
+import { selectTotalCountItemsCart } from "features/cart"
 
 export const Header = () => {
+  const totalItemsInCart = useAppSelector(selectTotalCountItemsCart)
   const handleLogoClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
@@ -28,7 +31,7 @@ export const Header = () => {
               <FontAwesomeIcon icon={faUser} style={{ height: "26px", width: "26px" }} />
             </Link>
             <Link to={PATHS.CART} className={"header__actions__item"}>
-              <span className={"header__actions__item__circle-cart"}>{1}</span>
+              <span className={"header__actions__item__circle-cart"}>{totalItemsInCart}</span>
               <FontAwesomeIcon icon={faCartShopping} style={{ height: "26px", width: "26px" }} />
             </Link>
           </div>

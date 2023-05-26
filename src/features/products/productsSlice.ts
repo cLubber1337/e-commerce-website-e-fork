@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { Product, Products } from "types/categories"
+import { Product, Products } from "types/product-types"
 import { BASE_URL } from "utils/constants"
 import axios from "axios"
 

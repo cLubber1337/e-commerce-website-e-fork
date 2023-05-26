@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { BASE_URL } from "utils/constants"
 import axios from "axios"
-import { Products } from "types/categories"
+import { Products } from "types/product-types"
 
 export const fetchNamesCategories = createAsyncThunk(
   "categories/fetchNamesCategories",

@@ -8,12 +8,13 @@ import { getCategoryNameHelper, getOldPriceHelper, getPercentHelper } from "util
 const ProductInfoCard = () => {
   const dispatch = useAppDispatch()
   const { id } = useParams()
+
   useEffect(() => {
-    dispatch(getSingleProduct(Number(id)))
+    if (id) dispatch(getSingleProduct(+id))
   }, [dispatch, id])
 
   const { title, description, thumbnail, rating, category, price, discountPercentage, brand } =
-    useAppSelector(selectSingleProduct)
+    useAppSelector(selectSingleProduct) || {}
 
   const discount = getPercentHelper(discountPercentage)
   const oldPrice = getOldPriceHelper(price, discount)
