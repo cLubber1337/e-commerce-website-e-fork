@@ -3,8 +3,9 @@ import { CustomButton } from "components/CustomButton"
 import { Link } from "react-router-dom"
 import { PATHS } from "utils/paths"
 import { getCategoryNameHelper, getOldPriceHelper, getPercentHelper } from "utils/productHelpers"
-import { useAppDispatch } from "features/store"
-import { addItem } from "features/cart"
+import { useAppDispatch, useAppSelector } from "features/store"
+import { addItem, selectCartItems } from "features/cart"
+import { CartItemType } from "types/cart-types"
 
 type Props = {
   title: string
@@ -28,6 +29,7 @@ export const ProductCard = ({
   const oldPrice = getOldPriceHelper(price, discount)
   const categoryName = getCategoryNameHelper(category)
   const dispatch = useAppDispatch()
+  const cartItems: CartItemType[] = useAppSelector(selectCartItems)
 
   const addToCart = () => {
     const item = {
@@ -39,6 +41,8 @@ export const ProductCard = ({
     }
     dispatch(addItem({ item }))
   }
+
+  let isProductInCart = cartItems.some((item) => item.id === id)
 
   return (
     <div className="product-card">
@@ -62,14 +66,26 @@ export const ProductCard = ({
         </div>
       </div>
       <div className="product-card__actions">
-        <CustomButton
-          title="Add to card"
-          onClick={addToCart}
-          size="-small"
-          color="-green"
-          icon={["fas", "cart-plus"]}
-          purpose="-cart"
-        />
+        {isProductInCart ? (
+          <Link to={PATHS.CART}>
+            <CustomButton
+              title="In cart"
+              onClick={() => null}
+              size="-small"
+              color="-green"
+              purpose="-cart"
+            />
+          </Link>
+        ) : (
+          <CustomButton
+            title="Add to card"
+            onClick={addToCart}
+            size="-small"
+            color="-base-color"
+            icon={["fas", "cart-plus"]}
+            purpose="-cart"
+          />
+        )}
       </div>
     </div>
   )

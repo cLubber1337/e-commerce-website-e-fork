@@ -5,6 +5,8 @@ import { faSquareMinus } from "@fortawesome/free-regular-svg-icons/faSquareMinus
 import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark"
 import { useAppDispatch } from "features/store"
 import { decQty, incQty, removeItem } from "features/cart"
+import { Link } from "react-router-dom"
+import { PATHS } from "utils/paths"
 
 type Props = {
   title: string
@@ -29,10 +31,17 @@ export const CartItem = ({ title, price, thumbnail, count, id }: Props) => {
   return (
     <div className="cart-product">
       <div className="cart-product__img">
-        <img src={thumbnail} alt="thumbnail" />
+        <Link to={`${PATHS.PRODUCT}/${id}`}>
+          <img src={thumbnail} alt="thumbnail" />
+        </Link>
       </div>
-      <div className="cart-product__title">{title}</div>
+      <div className="cart-product__title">
+        <Link to={`${PATHS.PRODUCT}/${id}`}>{title}</Link>
+      </div>
       <div className="cart-product__unit-price">${price}</div>
+
+      {/* ---------------------------quantity--------------------------- */}
+
       <div className="cart-product__quantity">
         <FontAwesomeIcon
           icon={faSquareMinus}

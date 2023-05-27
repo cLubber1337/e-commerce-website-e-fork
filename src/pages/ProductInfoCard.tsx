@@ -1,16 +1,26 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useAppDispatch, useAppSelector } from "features/store"
 import { getSingleProduct, selectSingleProduct } from "features/products"
 import { CustomButton } from "components/CustomButton"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { getCategoryNameHelper, getOldPriceHelper, getPercentHelper } from "utils/productHelpers"
+import { addItem, decQty, incQty, selectCartItems } from "features/cart"
+import { PATHS } from "utils/paths"
+import { CartItemType } from "types/cart-types"
 
 const ProductInfoCard = () => {
   const dispatch = useAppDispatch()
-  const { id } = useParams()
+  const id = Number(useParams().id)
+  let [qty, setQty] = useState(1)
+  const cartItems: CartItemType[] = useAppSelector(selectCartItems)
+
+  const currentItemInCart = cartItems.find((item) => item.id === id)
 
   useEffect(() => {
-    if (id) dispatch(getSingleProduct(+id))
+    if (currentItemInCart) {
+      setQty(currentItemInCart.count)
+    }
+    dispatch(getSingleProduct(id))
   }, [dispatch, id])
 
   const { title, description, thumbnail, rating, category, price, discountPercentage, brand } =
@@ -19,6 +29,29 @@ const ProductInfoCard = () => {
   const discount = getPercentHelper(discountPercentage)
   const oldPrice = getOldPriceHelper(price, discount)
   const categoryName = getCategoryNameHelper(category)
+
+  const handlerAddToCart = () => {
+    const item = {
+      id,
+      title,
+      price,
+      thumbnail: thumbnail || "",
+      count: qty,
+    }
+    dispatch(addItem({ item }))
+  }
+  const handlerIncQty = () => {
+    if (currentItemInCart) {
+      dispatch(incQty({ id }))
+    }
+    setQty(++qty)
+  }
+  const handlerDecQty = () => {
+    if (currentItemInCart) {
+      dispatch(decQty({ id }))
+    }
+    if (qty > 1) setQty(--qty)
+  }
 
   return (
     <section className="product-info-section">
@@ -55,25 +88,35 @@ const ProductInfoCard = () => {
           {/*----------------QUANTITY-------------------*/}
           <div className="product-info__quantity">
             <span className="product-info__quantity__label">Quantity:</span>
-            <button className="product-info__quantity__btn">-</button>
-            <span className="product-info__quantity__qty">1</span>
-            <button className="product-info__quantity__btn">+</button>
+            <button className="product-info__quantity__btn" onClick={handlerDecQty}>
+              -
+            </button>
+            <span className="product-info__quantity__qty">{qty}</span>
+            <button className="product-info__quantity__btn" onClick={handlerIncQty}>
+              +
+            </button>
           </div>
           {/*----------------ACTIONS-------------------*/}
+
           <div className="product-info__actions">
-            <CustomButton
-              title="Add to cart"
-              onClick={() => null}
-              size="-large"
-              color="-grey"
-              icon={["fas", "cart-plus"]}
-            ></CustomButton>
-            <CustomButton
-              title="Buy now"
-              onClick={() => null}
-              size="-large"
-              color="-green"
-            ></CustomButton>
+            {currentItemInCart ? (
+              <Link to={PATHS.CART}>
+                <CustomButton
+                  title="In cart"
+                  onClick={() => null}
+                  size="-large"
+                  color="-green"
+                ></CustomButton>
+              </Link>
+            ) : (
+              <CustomButton
+                title="Add to cart"
+                onClick={handlerAddToCart}
+                size="-large"
+                color="-base-color"
+                icon={["fas", "cart-plus"]}
+              ></CustomButton>
+            )}
           </div>
         </div>
       </div>

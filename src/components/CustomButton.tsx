@@ -11,7 +11,7 @@ type Props = {
   onClick: () => void
   size: "-small" | "-medium" | "-large"
   purpose?: "-search" | "-cart"
-  color: "-green" | "-grey"
+  color: "-base-color" | "-grey" | "-green"
   icon?: [IconPrefix, IconName]
 }
 

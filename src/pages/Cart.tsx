@@ -56,7 +56,7 @@ export const Cart = () => {
           />
         </div>
         <div className="section-cart__actions__checkout">
-          <CustomButton title="CHECKOUT" onClick={() => null} size="-large" color="-green" />
+          <CustomButton title="CHECKOUT" onClick={() => null} size="-large" color="-base-color" />
         </div>
       </div>
     </section>
