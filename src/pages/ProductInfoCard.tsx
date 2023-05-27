@@ -20,8 +20,8 @@ const ProductInfoCard = () => {
     if (currentItemInCart) {
       setQty(currentItemInCart.count)
     }
-    dispatch(getSingleProduct(id))
-  }, [dispatch, id])
+    dispatch(getSingleProduct({ id }))
+  }, [dispatch, id, currentItemInCart])
 
   const { title, description, thumbnail, rating, category, price, discountPercentage, brand } =
     useAppSelector(selectSingleProduct) || {}
@@ -35,7 +35,7 @@ const ProductInfoCard = () => {
       id,
       title,
       price,
-      thumbnail: thumbnail || "",
+      thumbnail,
       count: qty,
     }
     dispatch(addItem({ item }))
@@ -106,6 +106,7 @@ const ProductInfoCard = () => {
                   onClick={() => null}
                   size="-large"
                   color="-green"
+                  icon={["fas", "cart-arrow-down"]}
                 ></CustomButton>
               </Link>
             ) : (

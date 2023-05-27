@@ -4,7 +4,8 @@ import { IconName } from "@fortawesome/fontawesome-common-types"
 import { IconPrefix } from "@fortawesome/fontawesome-svg-core"
 import { faTrash, faCartPlus } from "@fortawesome/free-solid-svg-icons"
 import { library } from "@fortawesome/fontawesome-svg-core"
-library.add(faTrash, faCartPlus)
+import { faCartArrowDown } from "@fortawesome/free-solid-svg-icons/faCartArrowDown"
+library.add(faTrash, faCartPlus, faCartArrowDown)
 
 type Props = {
   title: string

@@ -74,6 +74,7 @@ export const ProductCard = ({
               size="-small"
               color="-green"
               purpose="-cart"
+              icon={["fas", "cart-arrow-down"]}
             />
           </Link>
         ) : (

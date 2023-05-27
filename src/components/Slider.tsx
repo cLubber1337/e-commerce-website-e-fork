@@ -1,5 +1,5 @@
 import React from "react"
 
-export const BannerWithSlider = () => {
+export const Slider = () => {
   return <section className={"banner"}></section>
 }

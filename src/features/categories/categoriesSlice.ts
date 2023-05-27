@@ -1,37 +1,37 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { BASE_URL } from "utils/constants"
 import axios from "axios"
-import { Products } from "types/product-types"
+import { Product, Products } from "types/product-types"
 
-export const fetchNamesCategories = createAsyncThunk(
+export const fetchNamesCategories = createAsyncThunk<{ namesCategories: string[] }, void>(
   "categories/fetchNamesCategories",
   async (_, thunkAPI) => {
     const { rejectWithValue } = thunkAPI
     try {
-      const { data } = await axios.get(`${BASE_URL}products/categories`)
-      return data
+      const { data } = await axios.get<string[]>(`${BASE_URL}products/categories`)
+      return { namesCategories: data }
     } catch (error) {
       return rejectWithValue(error)
     }
   }
 )
 
-export const getProductsCategory = createAsyncThunk<Products, string>(
-  "categories/getProductsCategory",
-  async (categoryName, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI
-    try {
-      const { data } = await axios.get<Products>(`${BASE_URL}products/category/${categoryName}`)
-      return data
-    } catch (error) {
-      return rejectWithValue(error)
-    }
+export const getProductsCategory = createAsyncThunk<
+  { category: Product[] },
+  { categoryName: string }
+>("categories/getProductsCategory", async ({ categoryName }, thunkAPI) => {
+  const { rejectWithValue } = thunkAPI
+  try {
+    const { data } = await axios.get<Products>(`${BASE_URL}products/category/${categoryName}`)
+    return { category: data.products }
+  } catch (error) {
+    return rejectWithValue(error)
   }
-)
+})
 
 const initialState = {
   namesCategories: [] as string[],
-  category: {} as Products,
+  category: [] as Product[],
 }
 
 const categoriesSlice = createSlice({
@@ -39,11 +39,11 @@ const categoriesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchNamesCategories.fulfilled, (state, action: PayloadAction<string[]>) => {
-      state.namesCategories = action.payload
+    builder.addCase(fetchNamesCategories.fulfilled, (state, action) => {
+      state.namesCategories = action.payload.namesCategories
     })
-    builder.addCase(getProductsCategory.fulfilled, (state, action: PayloadAction<Products>) => {
-      state.category = action.payload
+    builder.addCase(getProductsCategory.fulfilled, (state, action) => {
+      state.category = action.payload.category
     })
   },
 })

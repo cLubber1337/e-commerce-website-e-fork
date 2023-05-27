@@ -1,27 +1,27 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { Product, Products } from "types/product-types"
 import { BASE_URL } from "utils/constants"
 import axios from "axios"
 
-export const getAllProducts = createAsyncThunk<Products, void>(
+export const getAllProducts = createAsyncThunk<{ products: Products }, void>(
   "products/getAllProducts",
   async (_, thunkAPI) => {
     const { rejectWithValue } = thunkAPI
     try {
       const { data } = await axios.get<Products>(`${BASE_URL}products`)
-      return data
+      return { products: data }
     } catch (error) {
       return rejectWithValue(error)
     }
   }
 )
-export const getSingleProduct = createAsyncThunk<Product, number>(
+export const getSingleProduct = createAsyncThunk<{ product: Product }, { id: number }>(
   "products/getSingleProduct",
-  async (id, thunkAPI) => {
+  async ({ id }, thunkAPI) => {
     const { rejectWithValue } = thunkAPI
     try {
       const { data } = await axios.get<Product>(`${BASE_URL}products/${id}`)
-      return data
+      return { product: data }
     } catch (error) {
       return rejectWithValue(error)
     }
@@ -29,7 +29,7 @@ export const getSingleProduct = createAsyncThunk<Product, number>(
 )
 
 const initialState = {
-  products: null as Products | null,
+  products: {} as Products,
   product: {} as Product,
 }
 
@@ -38,11 +38,11 @@ const productsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getAllProducts.fulfilled, (state, action: PayloadAction<Products>) => {
-      state.products = action.payload
+    builder.addCase(getAllProducts.fulfilled, (state, action) => {
+      state.products = action.payload.products
     })
-    builder.addCase(getSingleProduct.fulfilled, (state, action: PayloadAction<Product>) => {
-      state.product = action.payload
+    builder.addCase(getSingleProduct.fulfilled, (state, action) => {
+      state.product = action.payload.product
     })
   },
 })
