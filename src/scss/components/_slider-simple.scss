@@ -1,0 +1,128 @@
+@import "src/scss/base/vars";
+
+//SLICK-SLIDER default settings
+
+.slick-slider {
+  position: relative;
+  margin-bottom: 40px;
+  width: 100%;
+}
+
+.slick-slider .slick-dots {
+  display: flex !important;
+  justify-content: center;
+  bottom: -18px;
+}
+.slick-slider .slick-dots li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 5px;
+  width: 30px;
+  cursor: pointer;
+}
+.slick-slider .slick-dots li button {
+  padding: 0;
+  line-height: 0;
+  max-width: 100%;
+  width: 28px;
+  height: 5px;
+  background-color: $grey-light;
+  border: none;
+  border-radius: 5px;
+  outline: transparent;
+  transition: all 0.15s ease-in-out;
+}
+.slick-slider .slick-dots li button:hover {
+  background-color: $black60;
+}
+.slick-slider .slick-dots li.slick-active button {
+  background-color: $green;
+  outline: transparent;
+}
+.slick-slider .slick-dots li button:before,
+.slick-slider .slick-dots li.slick-active button:before {
+  color: transparent;
+}
+.slick-slider .slick-slide img {
+  max-width: 100%;
+  width: 100%;
+  max-height: 380px;
+  margin: 0 auto;
+  outline: transparent;
+}
+
+.slick-list,
+.slick-track {
+  touch-action: pan-y;
+}
+.slick-slider .slick-track,
+.slick-slider .slick-list {
+  touch-action: pan-y;
+}
+.slick-prev:before,
+.slick-next:before {
+  opacity: 0 !important;
+}
+
+//SLIDER-SIMPLE (Banner)
+.slider-simple {
+  &__item {
+    width: 100%;
+    position: relative;
+    & > div {
+      width: 100%;
+    }
+    &__image {
+      cursor: pointer;
+    }
+  }
+}
+.slider {
+  &-arrow {
+    position: absolute !important;
+    top: 50% !important;
+    z-index: 1 !important;
+    &.slick-disabled {
+      .slider-arrow__button {
+        display: none;
+      }
+    }
+    &-custom {
+      svg {
+        height: 16px;
+        width: 8px;
+      }
+    }
+  }
+}
+
+.slider-arrow__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  height: 40px;
+  width: 40px;
+  background-color: var(--slider-arrow-backgroundColor);
+  border: 1px solid $grey-light;
+  border-radius: 50%;
+  box-shadow: 0 1rem 2rem rgba(4, 6, 28, 0.1);
+  opacity: var(--slider-arrow-opacity);
+
+  &__left {
+    left: 15px;
+  }
+
+  &__right {
+    right: 15px;
+  }
+
+  &:hover {
+    background-color: $black60;
+    border: 1px solid $black60;
+  }
+}

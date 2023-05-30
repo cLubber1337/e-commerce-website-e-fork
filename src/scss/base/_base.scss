@@ -38,7 +38,7 @@ button {
 }
 .grid-container {
   display: grid;
-  margin-top: 77px;
+  margin-top: 72px;
   grid-template-columns: 300px 1fr;
   @include mediaTablet {
     grid-template-columns: 200px 1fr;

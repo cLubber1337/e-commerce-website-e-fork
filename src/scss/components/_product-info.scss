@@ -6,6 +6,7 @@
   padding: 100px 0;
   @include mediaTablet {
     padding: 50px 0;
+    margin-top: 42px;
   }
   &__grid {
     background-color: $white;
@@ -37,15 +38,21 @@
   flex-direction: column;
   justify-content: center;
   @include mediaTablet {
-    margin-top: 20px;
+    margin-top: 10px;
   }
   &__title {
     font-size: 1.5rem;
     font-weight: bold;
+    @include mediaTablet {
+      font-size: 1.2rem;
+    }
   }
   &__description {
-    margin-top: 30px;
+    margin-top: 10px;
     font-size: 1rem;
+    @include mediaTablet {
+      font-size: 14px;
+    }
   }
 }
 
@@ -89,6 +96,9 @@
     text-decoration: line-through;
     line-height: 1.2rem;
     padding-left: 7px;
+    @include mediaTablet {
+      font-size: 1rem;
+    }
   }
   p {
     position: relative;
@@ -99,6 +109,9 @@
     font-weight: bold;
     font-size: 2.5rem;
     padding-right: 8px;
+    @include mediaTablet {
+      font-size: 2rem;
+    }
   }
   &__discount {
     position: absolute;
@@ -106,6 +119,9 @@
     color: $white;
     background-color: $red;
     border-radius: 5px;
+    @include mediaTablet {
+      font-size: 12px;
+    }
   }
 }
 
