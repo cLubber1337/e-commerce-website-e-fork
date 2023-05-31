@@ -40,7 +40,7 @@ button {
   margin-top: 72px;
   display: grid;
   grid-template-columns: minmax(200px, 300px) minmax(345px, 1284px);
-  @include media765px {
+  @include media768px {
     display: flex;
     flex-direction: column;
   }
@@ -54,7 +54,7 @@ button {
     width: 100%;
     display: flex;
     flex-direction: column;
-    @include media765px {
+    @include media768px {
       padding-left: 0;
       padding-top: 12px;
     }
@@ -63,7 +63,7 @@ button {
     @include mediaTablet {
       width: 200px;
     }
-    @include media765px {
+    @include media768px {
       display: none;
     }
   }

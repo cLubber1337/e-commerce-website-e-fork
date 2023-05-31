@@ -2,7 +2,7 @@ import React from "react"
 import { CustomButton } from "components/CustomButton"
 import { Link } from "react-router-dom"
 import { PATHS } from "utils/paths"
-import { getCategoryNameHelper, getOldPriceHelper, getPercentHelper } from "utils/productHelpers"
+import { getOldPriceHelper, getPercentHelper } from "utils/productHelpers"
 import { useAppDispatch, useAppSelector } from "features/store"
 import { addItem, selectCartItems } from "features/cart"
 import { CartItemType } from "types/cart-types"
@@ -16,18 +16,9 @@ type Props = {
   discountPercentage: number
   id: number
 }
-export const ProductCard = ({
-  title,
-  category,
-  brand,
-  discountPercentage,
-  thumbnail,
-  price,
-  id,
-}: Props) => {
+export const ProductCard = ({ title, brand, discountPercentage, thumbnail, price, id }: Props) => {
   const discount = getPercentHelper(discountPercentage)
   const oldPrice = getOldPriceHelper(price, discount)
-  const categoryName = getCategoryNameHelper(category)
   const dispatch = useAppDispatch()
   const cartItems: CartItemType[] = useAppSelector(selectCartItems)
 
@@ -46,25 +37,27 @@ export const ProductCard = ({
 
   return (
     <div className="product-card">
-      <div className="product-card__image">
-        <Link to={`${PATHS.PRODUCT}/${id}`}>
-          <img src={thumbnail} alt="title" />
-        </Link>
-      </div>
+      {/*-----------------------------Image---------------------------------*/}
+
+      <Link to={`${PATHS.PRODUCT}/${id}`} className="product-card__image">
+        <img src={thumbnail} alt="title" />
+      </Link>
+      {/*-----------------------------Info----------------------------------*/}
       <div className="product-card__info">
-        <div className="product-card__info__category">
-          <span className="product-card__info__category__text">{categoryName}</span>
-        </div>
-        <div className="product-card__info__name">
+        <div className="product-card__info__description">
           <p>{brand}</p>
           <Link to={`${PATHS.PRODUCT}/${id}`}>{title}</Link>
         </div>
+        {/*---------------------------Price---------------------------------*/}
         <div className="product-card__price">
-          <p className="product-card__price__discount">-{discount}%</p>
-          <span className="product-card__price__curr">${price}</span>
-          <span className="product-card__price__old">${oldPrice}</span>
+          <div style={{ display: "flex" }}>
+            <span className="product-card__price__discount">-{discount}%</span>
+            <span className="product-card__price__old">${oldPrice}</span>
+          </div>
+          <p className="product-card__price__curr">${price}</p>
         </div>
       </div>
+      {/*----------------------------Actions---------------------------------*/}
       <div className="product-card__actions">
         {isProductInCart ? (
           <Link to={PATHS.CART}>

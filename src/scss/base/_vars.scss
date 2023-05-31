@@ -17,21 +17,39 @@ $white: #fff;
 //Media
 $tablet: 959px;
 $mobile: 600px;
-$_765: 765px;
+$_768: 768px;
+$_1440: 1440px;
+$_1280: 1280px;
+$_1150: 1150px;
 
 //Mixins
+@mixin media1440px {
+  @media screen and (max-width: $_1440) {
+    @content;
+  }
+}
+@mixin media1280px {
+  @media screen and (max-width: $_1280) {
+    @content;
+  }
+}
+@mixin media1152px {
+  @media screen and (max-width: $_1150) {
+    @content;
+  }
+}
 @mixin mediaTablet {
   @media screen and (max-width: $tablet) {
     @content;
   }
 }
-@mixin mediaMobile {
-  @media screen and (max-width: $mobile) {
+@mixin media768px {
+  @media screen and (max-width: $_768) {
     @content;
   }
 }
-@mixin media765px {
-  @media screen and (max-width: $_765) {
+@mixin mediaMobile {
+  @media screen and (max-width: $mobile) {
     @content;
   }
 }

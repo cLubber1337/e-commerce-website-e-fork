@@ -1,104 +1,77 @@
 @import "./src/scss/base/vars";
 .product-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 250px;
-  background-color: whitesmoke;
-  padding: 5px;
-  border: 1px solid rgba(18, 37, 56, 0.2);
-  border-top: none;
-  border-left: none;
+  padding: 16px;
   &__image {
-    width: 200px;
-    height: 150px;
-    margin: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    display: block;
+    height: 170px;
+    text-align: center;
     img {
-      border-radius: 10px;
-      max-height: 150px;
-      max-width: 200px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-height: 140px;
+      max-width: 100%;
     }
   }
 }
-
 .product-card__info {
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
   gap: 4px;
   color: $black;
-  &__category {
-    color: $black;
-    width: 90%;
-    background-color: $blue-light;
-    border-radius: 0 10px 0 10px;
-    border-right: $blue solid 4px;
-
-    &__text {
-      font-size: 12px;
-      font-weight: bold;
-      padding: 2px 4px;
-      border-left: $blue solid 4px;
-      border-radius: 0 10px 0 10px;
-    }
-  }
-  &__name {
-    margin-left: 8px;
+  &__description {
     height: 62px;
     display: flex;
-    width: 90%;
+    width: 100%;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 8px;
     p {
       font-weight: bold;
     }
     a {
+      overflow: hidden;
       &:hover {
         text-decoration: underline;
       }
     }
   }
 }
-
 .product-card__price {
-  width: 90%;
+  width: 100%;
   color: $black;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
   margin: 4px 0;
   &__discount {
-    font-size: 12px;
-    line-height: 12px;
+    font-size: 14px;
+    line-height: 14px;
     font-weight: bold;
-    padding: 1px 4px;
+    padding: 2px 4px;
     display: flex;
     align-items: center;
     border-left: $green solid 4px;
-    border-right: $green solid 4px;
     background-color: $green40;
-    border-radius: 0 10px 0 10px;
   }
   &__old {
     font-size: 14px;
-    margin-left: 12px;
     display: flex;
     align-items: center;
+    line-height: 1.2;
     text-decoration: line-through;
+    padding-left: 10px;
   }
   &__curr {
     font-size: 20px;
+    line-height: 1;
     color: $red;
     font-weight: 700;
     display: flex;
     align-items: flex-start;
-    margin-left: 14px;
+    margin: 8px 0;
   }
 }
 
@@ -106,7 +79,6 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 10px 0;
   a {
     width: 100%;
     display: flex;

@@ -23,6 +23,27 @@
   }
 }
 .products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  &__item {
+    position: relative;
+    width: 16.66667%; // 6
+    border-right: 1px solid rgba(18, 37, 56, 0.2);
+    border-bottom: 1px solid rgba(18, 37, 56, 0.2);
+    box-sizing: border-box;
+
+    @include media1440px {
+      width: 20%; // 5
+    }
+    @include media1280px {
+      width: 25%; // 4
+    }
+    @include media1152px {
+      width: 33.33333%; // 3
+    }
+    @include media768px {
+      width: 50%; // 2
+    }
+  }
 }

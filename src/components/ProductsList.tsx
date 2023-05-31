@@ -12,9 +12,14 @@ export const ProductsList = ({ category, products }: Props) => {
     <section className="products-section">
       <h1 className="products-section__title">{category}</h1>
 
-      <div className="products">
-        {products && products.map((product) => <ProductCard key={product.id} {...product} />)}
-      </div>
+      <ul className="products">
+        {products &&
+          products.map((product) => (
+            <li className="products__item" key={product.id}>
+              <ProductCard {...product} />
+            </li>
+          ))}
+      </ul>
     </section>
   )
 }
