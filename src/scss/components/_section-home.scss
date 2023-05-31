@@ -1,37 +1,9 @@
 @import "./src/scss/base/vars";
 
 .section-home {
-  margin-top: 72px;
-  display: grid;
-  grid-template-columns: minmax(200px, 300px) minmax(360px, 1284px);
-  @include mediaTablet {
-    display: flex;
-    flex-direction: column;
+  &__banner {
+    max-width: 1200px;
+    width: 100%;
+    align-self: center;
   }
-}
-
-.section-home__left {
-  @include mediaTablet {
-    display: none;
-  }
-}
-
-.section-home__right {
-  padding-left: 20px;
-  padding-top: 24px;
-  max-width: 1284px;
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  @include mediaTablet {
-    padding-left: 0;
-    padding-top: 12px;
-  }
-}
-
-.section-home__right__banner {
-  max-width: 1200px;
-  width: 100%;
-  align-self: center;
 }

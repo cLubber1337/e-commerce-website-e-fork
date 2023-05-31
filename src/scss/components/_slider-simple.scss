@@ -18,8 +18,11 @@
   align-items: center;
   justify-content: center;
   margin: 0 5px;
-  width: 30px;
+  width: 28px;
   cursor: pointer;
+  @include mediaMobile {
+    width: 18px;
+  }
 }
 .slick-slider .slick-dots li button {
   padding: 0;
@@ -32,6 +35,10 @@
   border-radius: 5px;
   outline: transparent;
   transition: all 0.15s ease-in-out;
+  @include mediaMobile {
+    width: 18px;
+    height: 3px;
+  }
 }
 .slick-slider .slick-dots li button:hover {
   background-color: $black60;

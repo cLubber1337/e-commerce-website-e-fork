@@ -1,9 +1,4 @@
 @import "./src/scss/base/vars";
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
-  justify-content: center;
-}
 
 .products-section {
   width: 100%;
@@ -13,9 +8,7 @@
     font-weight: 700;
     padding: 12px 20px;
     border-left: $header-color solid 12px;
-    background-color: $white;
     line-height: 2rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin: 0 auto 8px auto;
     @include mediaTablet {
       font-size: 1.5rem;
@@ -28,4 +21,8 @@
       margin: 0 auto 4px auto;
     }
   }
+}
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
 }

@@ -37,10 +37,34 @@ button {
   display: none !important;
 }
 .grid-container {
-  display: grid;
   margin-top: 72px;
-  grid-template-columns: 300px 1fr;
+  display: grid;
+  grid-template-columns: minmax(200px, 300px) minmax(345px, 1284px);
+  @include media765px {
+    display: flex;
+    flex-direction: column;
+  }
   @include mediaTablet {
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 200px minmax(345px, 1284px);
+  }
+  &__right {
+    padding-left: 20px;
+    padding-top: 24px;
+    max-width: 1284px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    @include media765px {
+      padding-left: 0;
+      padding-top: 12px;
+    }
+  }
+  &__left {
+    @include mediaTablet {
+      width: 200px;
+    }
+    @include media765px {
+      display: none;
+    }
   }
 }

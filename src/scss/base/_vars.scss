@@ -17,6 +17,7 @@ $white: #fff;
 //Media
 $tablet: 959px;
 $mobile: 600px;
+$_765: 765px;
 
 //Mixins
 @mixin mediaTablet {
@@ -26,6 +27,11 @@ $mobile: 600px;
 }
 @mixin mediaMobile {
   @media screen and (max-width: $mobile) {
+    @content;
+  }
+}
+@mixin media765px {
+  @media screen and (max-width: $_765) {
     @content;
   }
 }
