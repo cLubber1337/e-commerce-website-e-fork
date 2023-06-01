@@ -7,12 +7,31 @@ import { getCategoryNameHelper, getOldPriceHelper, getPercentHelper } from "util
 import { addItem, decQty, incQty, selectCartItems } from "features/cart"
 import { PATHS } from "utils/paths"
 import { CartItemType } from "types/cart-types"
+import { isUndefined } from "lodash"
 
 const ProductInfoCard = () => {
   const dispatch = useAppDispatch()
+  const {
+    title,
+    description,
+    thumbnail,
+    rating,
+    category,
+    price,
+    discountPercentage,
+    brand,
+    images,
+  } = useAppSelector(selectSingleProduct)
+  const cartItems: CartItemType[] = useAppSelector(selectCartItems)
+
+  const discount = getPercentHelper(discountPercentage)
+  const oldPrice = getOldPriceHelper(price, discount)
+  const categoryName = getCategoryNameHelper(category)
+
   const id = Number(useParams().id)
   let [qty, setQty] = useState(1)
-  const cartItems: CartItemType[] = useAppSelector(selectCartItems)
+
+  let [mainImage, setMainImage] = useState("")
 
   const currentItemInCart = cartItems.find((item) => item.id === id)
 
@@ -22,13 +41,6 @@ const ProductInfoCard = () => {
     }
     dispatch(getSingleProduct({ id }))
   }, [dispatch, id, currentItemInCart])
-
-  const { title, description, thumbnail, rating, category, price, discountPercentage, brand } =
-    useAppSelector(selectSingleProduct) || {}
-
-  const discount = getPercentHelper(discountPercentage)
-  const oldPrice = getOldPriceHelper(price, discount)
-  const categoryName = getCategoryNameHelper(category)
 
   const handlerAddToCart = () => {
     const item = {
@@ -52,13 +64,33 @@ const ProductInfoCard = () => {
     }
     if (qty > 1) setQty(--qty)
   }
-
+  let thumbnailsItemClass = "product-info__images__thumbnails__item"
+  const activeThumbnailsItemClass = "thumbnails-active-item"
+  console.log(images)
   return (
     <section className="product-info-section">
       <div className="product-info-section__grid">
         {/*---------------IMAGES-------------------*/}
         <div className="product-info__images">
-          <img src={thumbnail} alt={thumbnail} />
+          <div className="product-info__images__main">
+            <img src={mainImage || thumbnail} alt={mainImage || thumbnail} />
+          </div>
+          <div className="product-info__images__thumbnails">
+            {!isUndefined(images) &&
+              images.map((image) => (
+                <img
+                  onClick={() => setMainImage(image)}
+                  key={image}
+                  className={
+                    image === mainImage
+                      ? `${thumbnailsItemClass} ${activeThumbnailsItemClass}`
+                      : thumbnailsItemClass
+                  }
+                  src={image}
+                  alt={title}
+                />
+              ))}
+          </div>
         </div>
         {/*---------------DESCRIPTION-------------------*/}
         <div className="product-info">

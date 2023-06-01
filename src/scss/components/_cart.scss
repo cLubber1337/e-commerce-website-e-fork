@@ -58,6 +58,7 @@
   }
   &__title {
     padding-left: 10px;
+    justify-self: start;
     a {
       &:hover {
         text-decoration: underline;
