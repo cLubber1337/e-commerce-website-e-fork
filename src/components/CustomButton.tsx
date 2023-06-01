@@ -2,9 +2,15 @@ import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IconName } from "@fortawesome/fontawesome-common-types"
 import { IconPrefix } from "@fortawesome/fontawesome-svg-core"
-import { faTrash, faCartPlus, faFolder, faCartArrowDown } from "@fortawesome/free-solid-svg-icons"
+import {
+  faTrash,
+  faCartPlus,
+  faFolder,
+  faCartArrowDown,
+  faHouse,
+} from "@fortawesome/free-solid-svg-icons"
 import { library } from "@fortawesome/fontawesome-svg-core"
-library.add(faTrash, faCartPlus, faCartArrowDown, faFolder)
+library.add(faTrash, faCartPlus, faCartArrowDown, faFolder, faHouse)
 
 type Props = {
   title: string

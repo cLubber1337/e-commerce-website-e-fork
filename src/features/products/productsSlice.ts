@@ -8,7 +8,7 @@ export const getAllProducts = createAsyncThunk<{ products: Products }, void>(
   async (_, thunkAPI) => {
     const { rejectWithValue } = thunkAPI
     try {
-      const { data } = await axios.get<Products>(`${BASE_URL}products?limit=100`)
+      const { data } = await axios.get<Products>(`${BASE_URL}products?limit=40`)
       return { products: data }
     } catch (error) {
       return rejectWithValue(error)

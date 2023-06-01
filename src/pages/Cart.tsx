@@ -9,6 +9,7 @@ import {
   selectTotalPriceCart,
 } from "features/cart"
 import { CartItemType } from "types/cart-types"
+import { CartEmpty } from "pages/CartEmpty"
 
 export const Cart = () => {
   const cartItems: CartItemType[] = useAppSelector(selectCartItems)
@@ -19,7 +20,7 @@ export const Cart = () => {
   if (!totalItemsInCart) {
     return (
       <div className="section-cart">
-        <h1 style={{ color: "red", fontSize: "30px" }}>КОРЗИНА ПУСТАЯ</h1>
+        <CartEmpty />
       </div>
     )
   }
