@@ -1,0 +1,50 @@
+@import "./src/scss/base/vars";
+
+.catalog-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  transform: translate(-50%, -50%) scale(0);
+  animation: open-modal 0.5s forwards;
+  @keyframes open-modal {
+    to {
+      transform: translate(0%, 0%) scale(1);
+    }
+  }
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    height: 57px;
+    padding-left: 20px;
+    padding-right: 24px;
+    border-bottom: 1px solid rgba(18, 37, 56, 0.2);
+    &__title {
+      font-weight: 700;
+      font-size: 24px;
+      color: $black;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    &__close-btn {
+      color: $black60;
+      font-size: 28px;
+      flex-shrink: 0;
+      &:hover {
+        color: $red;
+      }
+    }
+  }
+  &__body {
+    padding: 0 8px;
+    overflow-y: auto;
+  }
+}

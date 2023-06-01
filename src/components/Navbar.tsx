@@ -7,7 +7,7 @@ import { ICONS_FOR_NAVBAR } from "utils/constants"
 import { getCategoryNameHelper } from "utils/productHelpers"
 import { PATHS } from "utils/paths"
 
-export const Navbar = () => {
+export const Navbar = ({ handlerCloseModal }: { handlerCloseModal?: () => void }) => {
   const dispatch = useAppDispatch()
   const categoriesNames = useAppSelector(selectNamesCategories)
   useEffect(() => {
@@ -20,7 +20,11 @@ export const Navbar = () => {
         {categoriesNames &&
           categoriesNames.map((categoryName, index) => (
             <li className={"navbar__items__item"} key={categoryName}>
-              <Link className={"navbar__items__item-link"} to={`${PATHS.CATEGORY}/${categoryName}`}>
+              <Link
+                className={"navbar__items__item-link"}
+                onClick={handlerCloseModal}
+                to={`${PATHS.CATEGORY}/${categoryName}`}
+              >
                 <span className={"navbar__items__item-icon"}>
                   <FontAwesomeIcon icon={ICONS_FOR_NAVBAR[index]} />
                 </span>

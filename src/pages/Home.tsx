@@ -5,8 +5,8 @@ import { Navbar } from "components/Navbar"
 import { ProductsList } from "components/ProductsList"
 import { SliderSimple } from "components/SimpleSlider/SliderSimple"
 import { imagesForBanner } from "utils/images"
-import { CustomButton } from "components/CustomButton"
 import { useMediaQuery } from "react-responsive"
+import { CatalogModal } from "components/CatalogModal/CatalogModal"
 
 export const Home = () => {
   const dispatch = useAppDispatch()
@@ -27,16 +27,7 @@ export const Home = () => {
           <div className="section-home__banner">
             <SliderSimple dots={true} infinite={true} autoplay={false} images={imagesForBanner} />
           </div>
-          {isScreen765px && (
-            <CustomButton
-              title={"Catalog of goods"}
-              onClick={() => null}
-              size={"-large"}
-              color={"-green"}
-              icon={["fas", "folder"]}
-              style={{ marginBottom: "12px" }}
-            />
-          )}
+          {isScreen765px && <CatalogModal />}
           <ProductsList products={allProducts.products} category={"Best sellers"} />
         </div>
       </div>

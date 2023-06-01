@@ -5,8 +5,8 @@ import { useAppDispatch, useAppSelector } from "features/store"
 import { getCategoryNameHelper } from "utils/productHelpers"
 import { ProductsList } from "components/ProductsList"
 import { Navbar } from "components/Navbar"
-import { CustomButton } from "components/CustomButton"
 import { useMediaQuery } from "react-responsive"
+import { CatalogModal } from "components/CatalogModal/CatalogModal"
 
 export const ProductsOfCategory = () => {
   const dispatch = useAppDispatch()
@@ -28,16 +28,7 @@ export const ProductsOfCategory = () => {
           <Navbar />
         </div>
         <div className="grid-container__right">
-          {isScreen765px && (
-            <CustomButton
-              title={"Catalog of goods"}
-              onClick={() => null}
-              size={"-large"}
-              color={"-green"}
-              icon={["fas", "folder"]}
-              style={{ marginBottom: "12px" }}
-            />
-          )}
+          {isScreen765px && <CatalogModal />}
           <ProductsList category={category} products={productsCategory} />
         </div>
       </div>

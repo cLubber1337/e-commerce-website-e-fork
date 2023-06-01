@@ -17,7 +17,7 @@ $white: #fff;
 //Media
 $tablet: 959px;
 $mobile: 600px;
-$_768: 768px;
+$_765: 765px;
 $_1440: 1440px;
 $_1280: 1280px;
 $_1150: 1150px;
@@ -43,8 +43,8 @@ $_1150: 1150px;
     @content;
   }
 }
-@mixin media768px {
-  @media screen and (max-width: $_768) {
+@mixin media765px {
+  @media screen and (max-width: $_765) {
     @content;
   }
 }

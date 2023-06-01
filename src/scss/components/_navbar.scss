@@ -4,6 +4,9 @@
   width: 100%;
   border-right: 1px solid rgba(18, 37, 56, 0.2);
   height: 100%;
+  @include media765px {
+    border: none;
+  }
 }
 .navbar__items {
   position: relative;
@@ -11,9 +14,15 @@
   padding-top: 24px;
   padding-bottom: 24px;
   background-color: whitesmoke;
+  @include media765px {
+    padding-top: 12px;
+  }
 }
 
 .navbar__items__item {
+  @include media765px {
+    height: 35px;
+  }
 }
 .navbar__items__item-icon {
   position: relative;
@@ -24,11 +33,14 @@
   text-align: center;
   width: 24px;
   height: 24px;
+  @include media765px {
+    width: 30px;
+    height: 30px;
+  }
 }
 .navbar__items__item-link {
   color: $blue;
   position: relative;
-  z-index: 10;
   display: inline-block;
   vertical-align: bottom;
   width: 100%;
@@ -38,6 +50,12 @@
   font-size: 14px;
   line-height: 31px;
   transition: all 0.2s ease;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  @include media765px {
+    font-size: 16px;
+  }
   &:hover {
     color: $red;
     text-decoration: underline;
