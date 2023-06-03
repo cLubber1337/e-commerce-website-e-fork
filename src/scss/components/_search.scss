@@ -1,0 +1,81 @@
+@import "./src/scss/base/vars";
+
+.search {
+  position: relative;
+  height: 40px;
+  display: flex;
+  margin-left: 52px;
+  flex-direction: row;
+  width: 100%;
+  @include mediaTablet {
+    margin-left: 10px;
+  }
+}
+.search__form {
+  position: relative;
+  width: 100%;
+
+  &__input {
+    background-image: url("../../assets/img/header/search-icon.svg");
+    background-repeat: no-repeat;
+    background-color: $white;
+    height: 40px;
+    width: calc(100% - 76px);
+    font-size: 15px;
+    padding-left: 40px;
+    padding-right: 36px;
+    color: $black;
+    border-radius: 6px 0 0 6px;
+    &:focus {
+      outline: none;
+    }
+  }
+  &__results {
+    position: absolute;
+    left: 0;
+    background-color: $white;
+    width: calc(100% - 76px);
+    max-height: 300px;
+    height: auto;
+    border-top: 1px solid rgba(18, 37, 56, 0.2);
+    border-radius: 0 0 6px 6px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-y: auto;
+    a {
+      &:hover {
+        color: $black !important;
+      }
+    }
+    &__item {
+      cursor: pointer;
+      line-height: 2rem;
+      padding: 0 16px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      &:hover {
+        background-color: #eae9e6 !important;
+        color: $black !important;
+      }
+    }
+  }
+  @include mediaTablet {
+    margin-left: 4px;
+  }
+  &__btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+.search__form__xmark {
+  position: absolute;
+  top: 10px;
+  right: 86px;
+  color: $blue;
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}

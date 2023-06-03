@@ -3,12 +3,12 @@ import { Product, Products } from "types/product-types"
 import { BASE_URL } from "utils/constants"
 import axios from "axios"
 
-export const getAllProducts = createAsyncThunk<{ products: Products }, void>(
+export const getAllProducts = createAsyncThunk<{ products: Products }, { limit: string }>(
   "products/getAllProducts",
-  async (_, thunkAPI) => {
+  async ({ limit }, thunkAPI) => {
     const { rejectWithValue } = thunkAPI
     try {
-      const { data } = await axios.get<Products>(`${BASE_URL}products?limit=40`)
+      const { data } = await axios.get<Products>(`${BASE_URL}products?limit=${limit}`)
       return { products: data }
     } catch (error) {
       return rejectWithValue(error)

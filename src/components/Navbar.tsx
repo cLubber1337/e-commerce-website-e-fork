@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { memo, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "features/store"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -7,9 +7,10 @@ import { ICONS_FOR_NAVBAR } from "utils/constants"
 import { getCategoryNameHelper } from "utils/productHelpers"
 import { PATHS } from "utils/paths"
 
-export const Navbar = ({ handlerCloseModal }: { handlerCloseModal?: () => void }) => {
+export const Navbar = memo(({ handlerCloseModal }: { handlerCloseModal?: () => void }) => {
   const dispatch = useAppDispatch()
   const categoriesNames = useAppSelector(selectNamesCategories)
+
   useEffect(() => {
     dispatch(fetchNamesCategories())
   }, [dispatch])
@@ -35,4 +36,4 @@ export const Navbar = ({ handlerCloseModal }: { handlerCloseModal?: () => void }
       </ul>
     </aside>
   )
-}
+})

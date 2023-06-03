@@ -3,4 +3,5 @@ export const PATHS = {
   CART: "/cart",
   PRODUCT: "/products",
   CATEGORY: "/products/category",
+  SEARCH: "/search",
 }

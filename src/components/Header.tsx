@@ -4,7 +4,7 @@ import { PATHS } from "utils/paths"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser } from "@fortawesome/free-regular-svg-icons/faUser"
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping"
-import { Search } from "components/Search"
+import { Search } from "components/Search/Search"
 import { useAppSelector } from "features/store"
 import { selectTotalCountItemsCart } from "features/cart"
 

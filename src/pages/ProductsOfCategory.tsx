@@ -22,16 +22,14 @@ export const ProductsOfCategory = () => {
     }
   }, [dispatch, categoryName])
   return (
-    <section className="products-category">
-      <div className="grid-container">
-        <div className="grid-container__left">
-          <Navbar />
-        </div>
-        <div className="grid-container__right">
-          {isScreen765px && <CatalogModal />}
-          <ProductsList category={category} products={productsCategory} />
-        </div>
+    <div className="grid-container">
+      <div className="grid-container__left">
+        <Navbar />
       </div>
-    </section>
+      <div className="grid-container__right">
+        {isScreen765px && <CatalogModal />}
+        <ProductsList category={category} products={productsCategory} />
+      </div>
+    </div>
   )
 }

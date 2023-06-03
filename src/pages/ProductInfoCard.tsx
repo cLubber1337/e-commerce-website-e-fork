@@ -23,11 +23,9 @@ const ProductInfoCard = () => {
     images,
   } = useAppSelector(selectSingleProduct)
   const cartItems: CartItemType[] = useAppSelector(selectCartItems)
-
   const discount = getPercentHelper(discountPercentage)
   const oldPrice = getOldPriceHelper(price, discount)
   const categoryName = getCategoryNameHelper(category)
-
   const id = Number(useParams().id)
   let [qty, setQty] = useState(1)
 
@@ -66,7 +64,6 @@ const ProductInfoCard = () => {
   }
   let thumbnailsItemClass = "product-info__images__thumbnails__item"
   const activeThumbnailsItemClass = "thumbnails-active-item"
-  console.log(images)
   return (
     <section className="product-info-section">
       <div className="product-info-section__grid">

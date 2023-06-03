@@ -3,9 +3,10 @@ import categories from "features/categories/categoriesSlice"
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux"
 import products from "features/products/productsSlice"
 import cart from "features/cart/cartSlice"
+import search from "features/search/searchSlice"
 
 export const store = configureStore({
-  reducer: { categories, products, cart },
+  reducer: { categories, products, cart, search },
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
