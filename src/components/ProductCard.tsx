@@ -11,12 +11,19 @@ type Props = {
   title: string
   thumbnail?: string
   price: number
-  brand: string
   category: string
   discountPercentage: number
   id: number
+  description: string
 }
-export const ProductCard = ({ title, brand, discountPercentage, thumbnail, price, id }: Props) => {
+export const ProductCard = ({
+  title,
+  discountPercentage,
+  thumbnail,
+  price,
+  id,
+  description,
+}: Props) => {
   const discount = getPercentHelper(discountPercentage)
   const oldPrice = getOldPriceHelper(price, discount)
   const dispatch = useAppDispatch()
@@ -45,8 +52,8 @@ export const ProductCard = ({ title, brand, discountPercentage, thumbnail, price
       {/*-----------------------------Info----------------------------------*/}
       <div className="product-card__info">
         <div className="product-card__info__description">
-          <p>{brand}</p>
-          <Link to={`${PATHS.PRODUCT}/${id}`}>{title}</Link>
+          <p>{title}</p>
+          <Link to={`${PATHS.PRODUCT}/${id}`}>{description}</Link>
         </div>
         {/*---------------------------Price---------------------------------*/}
         <div className="product-card__price">

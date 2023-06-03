@@ -1,0 +1,45 @@
+@import "./src/scss/base/vars";
+
+.sort {
+  position: relative;
+  border: 1px solid rgba(18, 37, 56, 0.2);
+  padding: 2px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: $white;
+  @include mediaMobile {
+    font-size: 12px;
+  }
+  &:hover {
+    border: 1px solid $header-color;
+  }
+  &:active {
+    border: 1px solid $blue;
+  }
+  &__button__icon {
+    margin-left: 4px;
+    color: $header-color;
+  }
+
+  &__items {
+    position: absolute;
+    z-index: 12;
+    background-color: $white;
+    width: 100%;
+    border: 1px solid rgba(18, 37, 56, 0.2);
+    border-radius: 5px;
+    top: 28px;
+    left: 0;
+  }
+  &__item {
+    padding: 2px 5px;
+    &:hover {
+      background-color: #eae9e6;
+    }
+    &--active {
+      padding: 2px 5px;
+      border: 1px solid $header-color;
+      border-radius: 2px;
+    }
+  }
+}
