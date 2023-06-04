@@ -18,13 +18,13 @@ type Props = {
 
 export const CartItem = ({ title, price, thumbnail, count, id }: Props) => {
   const dispatch = useAppDispatch()
-  const handlerRemoveItem = () => {
+  const handleRemoveItem = () => {
     dispatch(removeItem({ id }))
   }
-  const handlerIncQty = () => {
+  const handleIncQty = () => {
     dispatch(incQty({ id }))
   }
-  const handlerDecQty = () => {
+  const handleDecQty = () => {
     dispatch(decQty({ id }))
   }
 
@@ -45,13 +45,13 @@ export const CartItem = ({ title, price, thumbnail, count, id }: Props) => {
       <div className="cart-product__quantity">
         <FontAwesomeIcon
           icon={faSquareMinus}
-          onClick={handlerDecQty}
+          onClick={handleDecQty}
           className="cart-product__quantity__icon"
         />
         <span>{count}</span>
         <FontAwesomeIcon
           icon={faSquarePlus}
-          onClick={handlerIncQty}
+          onClick={handleIncQty}
           className="cart-product__quantity__icon"
         />
       </div>
@@ -59,7 +59,7 @@ export const CartItem = ({ title, price, thumbnail, count, id }: Props) => {
         <span>${price * count}</span>
       </div>
       <div className="cart-product__delete">
-        <FontAwesomeIcon icon={faXmark} onClick={handlerRemoveItem} />
+        <FontAwesomeIcon icon={faXmark} onClick={handleRemoveItem} />
       </div>
     </div>
   )

@@ -13,7 +13,7 @@ import { CartEmpty } from "pages/CartEmpty"
 
 export const Cart = () => {
   const cartItems: CartItemType[] = useAppSelector(selectCartItems)
-  const totalItemsInCart: number = useAppSelector(selectTotalCountItemsCart)
+  const totalItemsInCart = useAppSelector(selectTotalCountItemsCart)
   const totalPrice = useAppSelector(selectTotalPriceCart)
   const dispatch = useAppDispatch()
 
