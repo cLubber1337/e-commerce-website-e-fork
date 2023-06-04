@@ -28,9 +28,7 @@ const ProductInfoCard = () => {
   const categoryName = getCategoryNameHelper(category)
   const id = Number(useParams().id)
   let [qty, setQty] = useState(1)
-
   let [mainImage, setMainImage] = useState("")
-
   const currentItemInCart = cartItems.find((item) => item.id === id)
 
   useEffect(() => {

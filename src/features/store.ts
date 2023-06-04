@@ -5,6 +5,7 @@ import products from "features/products/productsSlice"
 import cart from "features/cart/cartSlice"
 import search from "features/search/searchSlice"
 import filter from "features/filter/filterSlice"
+import app from "features/app/appSlice"
 import storage from "redux-persist/lib/storage"
 import {
   persistReducer,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   cart,
   search,
   filter,
+  app,
 })
 
 const persistConfig = {

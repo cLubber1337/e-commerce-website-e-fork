@@ -6,6 +6,8 @@ import { SortByType } from "types/filter-types"
 import { useAppSelector } from "features/store"
 import { selectSortBy } from "features/filter"
 import _ from "lodash"
+import { selectAppStatus } from "features/app"
+import { Loader } from "components/Loader"
 
 type Props = {
   category: string
@@ -14,6 +16,7 @@ type Props = {
 
 export const ProductsList = ({ category, products }: Props) => {
   const sortBy = useAppSelector(selectSortBy)
+  const status = useAppSelector(selectAppStatus)
 
   const sortingProducts = (products: Product[], sortBy: SortByType): Product[] => {
     const clonedProducts = _.cloneDeep(products)
@@ -48,14 +51,18 @@ export const ProductsList = ({ category, products }: Props) => {
         </div>
       </div>
 
-      <ul className="products">
-        {sortedProducts &&
-          sortedProducts.map((product) => (
-            <li className="products__item" key={product.id}>
-              <ProductCard {...product} />
-            </li>
-          ))}
-      </ul>
+      {status === "loading" ? (
+        <Loader />
+      ) : (
+        <ul className="products">
+          {sortedProducts &&
+            sortedProducts.map((product) => (
+              <li className="products__item" key={product.id}>
+                <ProductCard {...product} />
+              </li>
+            ))}
+        </ul>
+      )}
     </section>
   )
 }

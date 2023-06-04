@@ -15,7 +15,7 @@ function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(getAllProducts({ limit: "40" }))
+    dispatch(getAllProducts({ limit: "6" }))
   }, [dispatch])
   return (
     <>

@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { Product, Products } from "types/product-types"
 import { BASE_URL } from "utils/constants"
 import axios from "axios"
+import { AppStatusType } from "types/app-types"
 
 export const getAllProducts = createAsyncThunk<{ products: Products }, { limit: string }>(
   "products/getAllProducts",
@@ -31,6 +32,7 @@ export const getSingleProduct = createAsyncThunk<{ product: Product }, { id: num
 const initialState = {
   products: {} as Products,
   product: {} as Product,
+  statusSingleProduct: "idle" as AppStatusType,
 }
 
 const productsSlice = createSlice({
@@ -41,8 +43,16 @@ const productsSlice = createSlice({
     builder.addCase(getAllProducts.fulfilled, (state, action) => {
       state.products = action.payload.products
     })
+
     builder.addCase(getSingleProduct.fulfilled, (state, action) => {
       state.product = action.payload.product
+      state.statusSingleProduct = "success"
+    })
+    builder.addCase(getSingleProduct.rejected, (state) => {
+      state.statusSingleProduct = "error"
+    })
+    builder.addCase(getSingleProduct.pending, (state) => {
+      state.statusSingleProduct = "loading"
     })
   },
 })

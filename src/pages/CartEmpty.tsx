@@ -1,5 +1,5 @@
 import React from "react"
-import { cartImages } from "utils/images"
+import { images } from "utils/images"
 import { CustomButton } from "components/CustomButton"
 import { Link } from "react-router-dom"
 import { PATHS } from "utils/paths"
@@ -11,11 +11,7 @@ export const CartEmpty = () => {
       <p className="cart-empty__description">
         Most likely, you have not ordered any products yet. To order products, go to the main page.
       </p>
-      <img
-        className="cart-empty__image"
-        src={cartImages.cartEmpty.src}
-        alt={cartImages.cartEmpty.alt}
-      />
+      <img className="cart-empty__image" src={images.cartEmpty.src} alt={images.cartEmpty.alt} />
       <Link to={PATHS.HOME} className="cart-empty__action">
         <CustomButton
           title={"GO TO MAIN PAGE"}
