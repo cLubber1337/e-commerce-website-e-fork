@@ -6,6 +6,8 @@ import { getOldPriceHelper, getPercentHelper } from "utils/productHelpers"
 import { useAppDispatch, useAppSelector } from "features/store"
 import { addItem, selectCartItems } from "features/cart"
 import { CartItemType } from "types/cart-types"
+import LazyLoad from "react-lazyload"
+import { Blurhash } from "react-blurhash"
 
 type Props = {
   title: string
@@ -47,7 +49,13 @@ export const ProductCard = ({
       {/*-----------------------------Image---------------------------------*/}
 
       <Link to={`${PATHS.PRODUCT}/${id}`} className="product-card__image">
-        <img src={thumbnail} alt="title" />
+        <LazyLoad once>
+          {thumbnail ? (
+            <img src={thumbnail} alt="title" />
+          ) : (
+            <Blurhash hash="LKN]Rv%2Tw=w]~RBVZRi};RPxuwH" width="100%" height="170px" />
+          )}
+        </LazyLoad>
       </Link>
       {/*-----------------------------Info----------------------------------*/}
       <div className="product-card__info">

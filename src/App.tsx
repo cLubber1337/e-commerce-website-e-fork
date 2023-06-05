@@ -7,16 +7,17 @@ import { PATHS } from "utils/paths"
 import { Cart } from "pages/Cart"
 import ProductInfoCard from "pages/ProductInfoCard"
 import { ProductsOfCategory } from "pages/ProductsOfCategory"
-import { useAppDispatch } from "features/store"
-import { getAllProducts } from "features/products"
 import { SearchResults } from "pages/SearchResults"
+import { getAllProducts } from "features/products"
+import { useAppDispatch } from "features/store"
 
 function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(getAllProducts({ limit: "6" }))
+    dispatch(getAllProducts({ limit: 6, skip: 0 }))
   }, [dispatch])
+
   return (
     <>
       <Header />

@@ -23,7 +23,7 @@ export const Home = () => {
             <SliderSimple dots={true} infinite={true} autoplay={false} images={imagesForBanner} />
           </div>
           {isScreen765px && <CatalogModal />}
-          <ProductsList products={allProducts.products} category={"Best sellers"} />
+          <ProductsList products={allProducts} category={"Best sellers"} />
         </div>
       </div>
     </section>

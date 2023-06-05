@@ -8,6 +8,7 @@ import { addItem, decQty, incQty, selectCartItems } from "features/cart"
 import { PATHS } from "utils/paths"
 import { CartItemType } from "types/cart-types"
 import { isUndefined } from "lodash"
+import LazyLoad from "react-lazyload"
 
 const ProductInfoCard = () => {
   const dispatch = useAppDispatch()
@@ -73,17 +74,18 @@ const ProductInfoCard = () => {
           <div className="product-info__images__thumbnails">
             {!isUndefined(images) &&
               images.map((image) => (
-                <img
-                  onClick={() => setMainImage(image)}
-                  key={image}
-                  className={
-                    image === mainImage
-                      ? `${thumbnailsItemClass} ${activeThumbnailsItemClass}`
-                      : thumbnailsItemClass
-                  }
-                  src={image}
-                  alt={title}
-                />
+                <LazyLoad key={image}>
+                  <img
+                    onClick={() => setMainImage(image)}
+                    className={
+                      image === mainImage
+                        ? `${thumbnailsItemClass} ${activeThumbnailsItemClass}`
+                        : thumbnailsItemClass
+                    }
+                    src={image}
+                    alt={title}
+                  />
+                </LazyLoad>
               ))}
           </div>
         </div>
