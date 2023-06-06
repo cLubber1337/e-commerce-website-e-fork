@@ -1,47 +1,48 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { ProductCard } from "components/ProductCard"
-import { Product } from "types/product-types"
+import { Product, Products } from "types/product-types"
 import { Sort } from "components/Sort/Sort"
-import { SortByType } from "types/filter-types"
 import { useAppSelector } from "features/store"
 import { selectSortBy } from "features/filter"
-import _ from "lodash"
 import { selectAppStatus } from "features/app"
 import { Loader } from "components/Loader"
+import { sortingProducts } from "utils/productHelpers"
+import InfiniteScroll from "react-infinite-scroll-component"
+import { productsApi } from "api/products.api"
+import { debounce } from "lodash"
 
 type Props = {
   category: string
-  products: Product[]
+  products: Products
 }
 
 export const ProductsList = ({ category, products }: Props) => {
   const sortBy = useAppSelector(selectSortBy)
   const status = useAppSelector(selectAppStatus)
+  const [skip, setSkip] = useState(6)
+  const [hasMore, setHasMore] = useState(true)
+  const [productsList, setProductsList] = useState<Product[]>(products.products)
 
-  const sortingProducts = (products: Product[], sortBy: SortByType): Product[] => {
-    const clonedProducts = _.cloneDeep(products)
-    const collator = new Intl.Collator("en", {
-      sensitivity: "base",
-      ignorePunctuation: true,
-      numeric: true,
-    })
-    if (sortBy === "price-asc") {
-      return clonedProducts.sort((a, b) => a.price - b.price)
+  const loadMore = async () => {
+    if (products.total > productsList.length && skip < products.total && skip > 6) {
+      try {
+        const { data } = await productsApi.getAllProducts(6, skip)
+        setProductsList([...productsList, ...data.products])
+        setSkip(skip + 6)
+      } catch (error) {
+        console.log(error)
+      }
+    } else {
+      setHasMore(false)
     }
-    if (sortBy === "price-desc") {
-      return clonedProducts.sort((a, b) => b.price - a.price)
-    }
-    if (sortBy === "name-asc") {
-      return clonedProducts.sort((a, b) => collator.compare(a.title, b.title))
-    }
-    if (sortBy === "name-desc") {
-      return clonedProducts.sort((a, b) => collator.compare(b.title, a.title))
-    }
-    return clonedProducts
   }
+  const debouncedLoadMore = debounce(loadMore, 1000)
 
-  const sortedProducts = sortingProducts(products, sortBy)
+  useEffect(() => {
+    setSkip((prevState) => prevState + 6)
+  }, [hasMore])
 
+  const sortedProducts = sortingProducts(productsList, sortBy)
   return (
     <section className="products-section">
       <div className="products-section__footer">
@@ -51,17 +52,32 @@ export const ProductsList = ({ category, products }: Props) => {
         </div>
       </div>
 
-      {status === "loading" ? (
+      {status !== "success" ? (
         <Loader />
       ) : (
-        <ul className="products">
-          {sortedProducts &&
-            sortedProducts.map((product) => (
-              <li className="products__item" key={product.id}>
-                <ProductCard {...product} />
-              </li>
-            ))}
-        </ul>
+        <>
+          <ul>
+            <InfiniteScroll
+              className="products"
+              dataLength={productsList.length}
+              next={debouncedLoadMore}
+              loader={
+                <div style={{ margin: "0 auto" }}>
+                  <Loader />
+                </div>
+              }
+              hasMore={hasMore}
+              scrollThreshold={1}
+            >
+              {sortedProducts &&
+                sortedProducts.map((product) => (
+                  <li className="products__item" key={product.id}>
+                    <ProductCard {...product} />
+                  </li>
+                ))}
+            </InfiniteScroll>
+          </ul>
+        </>
       )}
     </section>
   )

@@ -1,14 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { BASE_URL } from "utils/constants"
-import axios from "axios"
-import { Product, Products } from "types/product-types"
+import { Products } from "types/product-types"
+import { categoriesApi } from "api/categories.api"
 
 export const fetchNamesCategories = createAsyncThunk<{ namesCategories: string[] }, void>(
   "categories/fetchNamesCategories",
   async (_, thunkAPI) => {
     const { rejectWithValue } = thunkAPI
     try {
-      const { data } = await axios.get<string[]>(`${BASE_URL}products/categories`)
+      const { data } = await categoriesApi.fetchNamesCategories()
       return { namesCategories: data }
     } catch (error) {
       return rejectWithValue(error)
@@ -17,13 +16,13 @@ export const fetchNamesCategories = createAsyncThunk<{ namesCategories: string[]
 )
 
 export const getProductsCategory = createAsyncThunk<
-  { category: Product[] },
+  { category: Products },
   { categoryName: string }
 >("categories/getProductsCategory", async ({ categoryName }, thunkAPI) => {
   const { rejectWithValue } = thunkAPI
   try {
-    const { data } = await axios.get<Products>(`${BASE_URL}products/category/${categoryName}`)
-    return { category: data.products }
+    const { data } = await categoriesApi.getProductsCategory(categoryName)
+    return { category: data }
   } catch (error) {
     return rejectWithValue(error)
   }
@@ -31,7 +30,7 @@ export const getProductsCategory = createAsyncThunk<
 
 const initialState = {
   namesCategories: [] as string[],
-  category: [] as Product[],
+  category: {} as Products,
 }
 
 const categoriesSlice = createSlice({

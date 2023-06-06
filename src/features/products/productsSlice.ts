@@ -1,17 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { Product, Products } from "types/product-types"
-import { BASE_URL } from "utils/constants"
-import axios from "axios"
 import { AppStatusType } from "types/app-types"
+import { productsApi } from "api/products.api"
 
 export const getAllProducts = createAsyncThunk<
-  { products: Product[]; total: number },
+  { products: Products },
   { limit: number; skip: number }
 >("products/getAllProducts", async ({ limit, skip }, thunkAPI) => {
   const { rejectWithValue } = thunkAPI
   try {
-    const { data } = await axios.get<Products>(`${BASE_URL}products?limit=${limit}&skip=${skip}`)
-    return { products: data.products, total: data.total }
+    const { data } = await productsApi.getAllProducts(limit, skip)
+    return { products: data }
   } catch (error) {
     return rejectWithValue(error)
   }
@@ -21,7 +20,7 @@ export const getSingleProduct = createAsyncThunk<{ product: Product }, { id: num
   async ({ id }, thunkAPI) => {
     const { rejectWithValue } = thunkAPI
     try {
-      const { data } = await axios.get<Product>(`${BASE_URL}products/${id}`)
+      const { data } = await productsApi.getSingleProduct(id)
       return { product: data }
     } catch (error) {
       return rejectWithValue(error)
@@ -30,10 +29,9 @@ export const getSingleProduct = createAsyncThunk<{ product: Product }, { id: num
 )
 
 const initialState = {
-  products: [] as Product[],
+  products: {} as Products,
   product: {} as Product,
   statusSingleProduct: "idle" as AppStatusType,
-  total: 0 as number,
 }
 
 const productsSlice = createSlice({
@@ -43,9 +41,7 @@ const productsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAllProducts.fulfilled, (state, action) => {
       state.products = action.payload.products
-      state.total = action.payload.total
     })
-
     builder.addCase(getSingleProduct.fulfilled, (state, action) => {
       state.product = action.payload.product
       state.statusSingleProduct = "success"

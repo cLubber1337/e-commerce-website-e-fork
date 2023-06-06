@@ -1,35 +1,30 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { Product, Products } from "types/product-types"
-import axios from "axios"
-import { BASE_URL } from "utils/constants"
-
-let initialState = {
-  searchResults: [] as Product[],
-  searchValue: "",
-}
+import { Products } from "types/product-types"
+import { searchApi } from "api/search.api"
 
 export const fetchSearchedResults = createAsyncThunk<
-  { searchResult: Product[]; searchValue: string },
+  { searchResult: Products; searchValue: string },
   { searchValue: string }
 >("search/fetchSearchedResults", async ({ searchValue }, thunkAPI) => {
   const { rejectWithValue } = thunkAPI
   try {
-    const { data } = await axios.get<Products>(`${BASE_URL}products/search?q=${searchValue}`)
-    let searchResult = data.products
+    const { data } = await searchApi.fetchSearchedResults(searchValue)
+    let searchResult = data
     return { searchResult, searchValue }
   } catch (error) {
     return rejectWithValue(error)
   }
 })
 
+let initialState = {
+  searchResults: {} as Products,
+  searchValue: "",
+}
+
 const searchSlice = createSlice({
   name: "search",
   initialState,
-  reducers: {
-    clearSearchResults: (state) => {
-      state.searchResults = []
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchSearchedResults.fulfilled, (state, action) => {
       state.searchResults = action.payload.searchResult
@@ -38,5 +33,4 @@ const searchSlice = createSlice({
   },
 })
 
-export const { clearSearchResults } = searchSlice.actions
 export default searchSlice.reducer

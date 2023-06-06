@@ -9,7 +9,6 @@ export const Loader = () => {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "whitesmoke",
-        marginTop: "100px",
       }}
     >
       <img src={images.loading.src} alt={images.loading.alt} />

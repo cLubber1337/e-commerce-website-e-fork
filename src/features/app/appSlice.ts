@@ -12,25 +12,19 @@ const appSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addMatcher(
-        (action) => {
-          return action.type.endsWith("/pending")
-        },
+        (action) => action.type.endsWith("/pending") && action.type.startsWith("products/"),
         (state) => {
           state.status = "loading"
         }
       )
       .addMatcher(
-        (action) => {
-          return action.type.endsWith("/rejected")
-        },
+        (action) => action.type.endsWith("/rejected") && action.type.startsWith("products/"),
         (state) => {
           state.status = "error"
         }
       )
       .addMatcher(
-        (action) => {
-          return action.type.endsWith("/fulfilled")
-        },
+        (action) => action.type.endsWith("/fulfilled") && action.type.startsWith("products/"),
         (state) => {
           state.status = "success"
         }

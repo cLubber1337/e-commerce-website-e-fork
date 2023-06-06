@@ -10,12 +10,14 @@ import { ProductsOfCategory } from "pages/ProductsOfCategory"
 import { SearchResults } from "pages/SearchResults"
 import { getAllProducts } from "features/products"
 import { useAppDispatch } from "features/store"
+import { fetchNamesCategories } from "features/categories"
 
 function App() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(getAllProducts({ limit: 6, skip: 0 }))
+    dispatch(fetchNamesCategories())
+    dispatch(getAllProducts({ limit: 12, skip: 0 }))
   }, [dispatch])
 
   return (

@@ -1,16 +1,16 @@
 import React, { memo } from "react"
-import { Product } from "types/product-types"
+import { Products } from "types/product-types"
 
 type Props = {
-  searchResults: Product[]
+  searchResults: Products
   handleClickItem: (e: React.MouseEvent<EventTarget>, id: string) => void
 }
 
 const SearchResults = memo(({ searchResults, handleClickItem }: Props) => {
   return (
     <ul className={"search__form__results"}>
-      {searchResults.length > 0 ? (
-        searchResults.map((product) => (
+      {searchResults.products.length > 0 ? (
+        searchResults.products.map((product) => (
           <li
             className="search__form__results__item"
             key={product.id}

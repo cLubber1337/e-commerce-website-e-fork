@@ -17,8 +17,14 @@ import {
   faShirt,
   faShoePrints,
 } from "@fortawesome/free-solid-svg-icons"
+import axios from "axios"
 
 export const BASE_URL = "https://dummyjson.com/"
+
+export const instance = axios.create({
+  baseURL: "https://dummyjson.com/",
+})
+
 export const ICONS_FOR_NAVBAR = [
   faMobileScreenButton,
   faLaptop,
