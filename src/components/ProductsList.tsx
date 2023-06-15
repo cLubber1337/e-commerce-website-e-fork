@@ -40,9 +40,14 @@ export const ProductsList = ({ category, products }: Props) => {
 
   useEffect(() => {
     setSkip((prevState) => prevState + 6)
-  }, [hasMore])
+    setProductsList(products.products)
+    return () => {
+      setProductsList([])
+    }
+  }, [hasMore, products.products])
 
   const sortedProducts = sortingProducts(productsList, sortBy)
+
   return (
     <section className="products-section">
       <div className="products-section__footer">
@@ -59,7 +64,7 @@ export const ProductsList = ({ category, products }: Props) => {
           <ul>
             <InfiniteScroll
               className="products"
-              dataLength={productsList.length}
+              dataLength={sortedProducts.length}
               next={debouncedLoadMore}
               loader={
                 <div style={{ margin: "0 auto" }}>

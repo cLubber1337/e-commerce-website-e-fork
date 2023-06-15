@@ -11,7 +11,6 @@ import { CatalogModal } from "components/CatalogModal/CatalogModal"
 export const Home = () => {
   const isScreen765px = useMediaQuery({ query: "(max-width: 765px)" })
   const allProducts = useAppSelector(selectAllProducts)
-
   return (
     <section className="section-home">
       <div className="grid-container">
@@ -20,7 +19,13 @@ export const Home = () => {
         </div>
         <div className="grid-container__right">
           <div className="section-home__banner">
-            <SliderSimple dots={true} infinite={true} autoplay={false} images={imagesForBanner} />
+            <SliderSimple
+              dots={true}
+              infinite={true}
+              autoplay={true}
+              images={imagesForBanner}
+              autoplaySpeed={4000}
+            />
           </div>
           {isScreen765px && <CatalogModal />}
           <ProductsList products={allProducts} category={"Best sellers"} />

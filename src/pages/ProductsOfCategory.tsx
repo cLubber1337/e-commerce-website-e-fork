@@ -21,6 +21,7 @@ export const ProductsOfCategory = () => {
       setCategory(getCategoryNameHelper(categoryName))
     }
   }, [dispatch, categoryName])
+
   return (
     <div className="grid-container">
       <div className="grid-container__left">

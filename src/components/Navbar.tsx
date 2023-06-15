@@ -9,7 +9,6 @@ import { PATHS } from "utils/paths"
 
 export const Navbar = memo(({ handlerCloseModal }: { handlerCloseModal?: () => void }) => {
   const categoriesNames = useAppSelector(selectNamesCategories)
-
   return (
     <aside className={"navbar"}>
       <ul className={"navbar__items"}>
