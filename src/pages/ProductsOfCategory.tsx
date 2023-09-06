@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useLayoutEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getProductsCategory, selectProductsCategory } from "features/categories"
 import { useAppDispatch, useAppSelector } from "features/store"
@@ -7,6 +7,7 @@ import { ProductsList } from "components/ProductsList"
 import { Navbar } from "components/Navbar"
 import { useMediaQuery } from "react-responsive"
 import { CatalogModal } from "components/CatalogModal/CatalogModal"
+import { Loader } from "components/Loader"
 
 export const ProductsOfCategory = () => {
   const dispatch = useAppDispatch()
@@ -15,12 +16,19 @@ export const ProductsOfCategory = () => {
   const [category, setCategory] = useState("")
   const isScreen765px = useMediaQuery({ query: "(max-width: 765px)" })
 
-  useEffect(() => {
+  console.log(productsCategory)
+  console.log(categoryName)
+
+  useLayoutEffect(() => {
     if (categoryName) {
       dispatch(getProductsCategory({ categoryName }))
       setCategory(getCategoryNameHelper(categoryName))
     }
   }, [dispatch, categoryName])
+
+  if (Object.entries(productsCategory).length === 0) {
+    return <Loader />
+  }
 
   return (
     <div className="grid-container">

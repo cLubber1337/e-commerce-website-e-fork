@@ -78,7 +78,7 @@ export const Search = () => {
           placeholder="Search..."
         />
 
-        {searchValue && isOpen && (
+        {Object.entries(searchResults).length !== 0 && searchValue && isOpen && (
           <SearchResults searchResults={searchResults} handleClickItem={handleClickItem} />
         )}
 
